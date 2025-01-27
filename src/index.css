@@ -1,0 +1,201 @@
+body {
+  margin: 0;
+  font-family: "Apis", sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+.MuiTypography-root{
+  font-family: "Apis", sans-serif !important;
+}
+
+@import "https://unpkg.com/apis-font/fonts/font.css";
+
+.d-flex {
+  display: flex;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.gap-10px{
+  gap: 10px;
+}
+.w-100{
+  width:100%
+}
+.landingcdic,
+.patientbg{
+  background-position: center center;
+    background-size: cover;
+    height: 100vh;
+    background-image: url(.././src/img/langpage.jpg);
+    /* background-image:    linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(245, 246, 252, 0.52)),    url('.././src/img/langpage.jpg'); */
+    display: flex
+;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 0px !important;
+}
+
+.patientMainSection{
+  
+}
+
+.patientSection {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70%;
+}
+
+.leftDiv{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-logo {
+  width: 80% !important;
+  max-width: 100%;
+        height: auto;
+
+}
+
+.heading{
+  color: #fff;
+  font-size: 24px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.sub-heading{
+  color: #001965;
+  font-size: 14px;
+  margin-top: 0px;
+  margin-bottom: 2px;
+}
+
+.patientIcon {
+  color: #fff !important;
+  background-color: #001965;
+    padding: 10px;
+    border-radius: 50px;
+}
+
+.existingPatient {
+  color: #001965 !important;
+  background-color: #fff;
+}
+
+.existing_patient_card {
+  box-shadow: none;
+  background-color: transparent;
+    border: 1px solid #E5E7EB;
+    color: #Fff;
+}
+
+.existing-button{
+   border-color: #001965 !important;
+   color: #fff !important;
+   background-color: #001965 !important;
+}
+
+.existing-button svg{
+  color: #Fff !important;
+} 
+
+.button-new {
+  background-color: #001965 !important;
+}
+
+.startSection{
+  height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* margin-left: 20px;
+    margin-right: 20px; */
+}
+
+.startSection svg {
+  font-size: 1.5rem !important;
+}
+
+.iconimg{
+  margin-left: 11px;
+}
+
+.existing-button {
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+}
+
+.patientbg .MuiPaper-root
+{
+  background-color: #ffffff78;
+    box-shadow: none;
+  color: #001965;
+}
+
+.patientbg svg{
+  font-size: 80px;
+  color: #001965;
+}
+
+.start-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8PX;
+  margin-top: 42px !important;
+  width: 90%;
+}
+
+.boxCard{
+  background-color: #ffffff78;
+}
+
+.commonButton{
+  background-color: #001965 !important;
+}
+
+.patientMainSection .patientImg{
+  width: 50%;
+}
+
+.patientbg .MuiCardContent-root {
+  padding-bottom: 16px !important;
+}
+
+.patientSection .MuiTypography-root{
+  font-size: 18px;
+}
+
+.patientMainSection .patientLogo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.patientMainSection .patientLogo .main-logo {
+  width: 40% !important;
+
+}
+
+.voiceIcon{
+  width: 20px;
+}
