@@ -200,3 +200,10 @@ body {
 .voiceIcon{
   width: 20px;
 }
+
+.backButton{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
