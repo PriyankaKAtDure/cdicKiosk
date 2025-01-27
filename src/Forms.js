@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Typography, Grid, TextField, Button, MenuItem,  InputAdornment, } from "@mui/material";
 import imgUrl from "./img/imgurl";
+import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
 
 export default function Forms() {
   return (
@@ -56,9 +57,9 @@ export default function Forms() {
                 <MenuItem value="Other">Other</MenuItem>
               </TextField>
             </Grid> */}
-            <Grid item xs={12}>
+            <Grid item xs={12} className="d-flex justify-content-center align-items-center ">
               <Button variant="contained" color="primary" fullWidth className="commonButton">
-                Next
+                Next <ArrowForwardOutlinedIcon></ArrowForwardOutlinedIcon>
               </Button>
             </Grid>
           </Grid>

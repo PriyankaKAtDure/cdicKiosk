@@ -150,10 +150,10 @@ body {
   color: #001965;
 }
 
-.patientbg svg{
+/* .patientbg svg{
   font-size: 80px;
   color: #001965;
-}
+} */
 
 .start-button{
   display: flex;
@@ -170,6 +170,7 @@ body {
 
 .commonButton{
   background-color: #001965 !important;
+  gap: 7px;
 }
 
 .patientMainSection .patientImg{
