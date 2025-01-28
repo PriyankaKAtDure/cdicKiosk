@@ -5,10 +5,55 @@
   --var-nova-color: #001965;
   --color-white: #fff;
   --box-card-color: #ffffff78;
+
+  --input-icon-color:#9a9694;
 }
 
 *{
   font-family: var(--body-font-family) !important;
+}
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  border-radius: 16px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.placeholderItem {
+  color: rgb(81 81 81 / 38%);
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 16px;
+}
+
+input:-internal-autofill-selected {
+  background-color: transparent !important;
+}
+
+input:-internal-autofill-selected {
+  background-color: transparent;
+}
+
+input:-webkit-autofill {
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #a0a0a5;
 }
 
 body {
@@ -47,6 +92,19 @@ body {
 .w-100{
   width:100%
 }
+
+.mt-10px{
+  margin-top: 10px !important;
+}
+
+.MuiFormControl-root svg {
+  fill: var(--input-icon-color);
+}
+
+.placeholder-input{
+  color: var(--input-icon-color);
+}
+
 
 .landingcdic,
 .patientbg{

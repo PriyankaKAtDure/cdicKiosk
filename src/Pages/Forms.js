@@ -1,11 +1,15 @@
 import React, { useState } from "react";
-import { Box, Typography, Grid, TextField, Button, MenuItem, InputAdornment, } from "@mui/material";
+import { Box, Typography, Grid, TextField, Button, MenuItem, InputAdornment,styled } from "@mui/material";
 import imgUrl from "../img/imgurl";
 import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
 import { ArrowBack, ArrowBackOutlined } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import WcOutlinedIcon from '@mui/icons-material/WcOutlined';
+import FamilyRestroomOutlinedIcon from '@mui/icons-material/FamilyRestroomOutlined';
+import ContactPhoneOutlinedIcon from '@mui/icons-material/ContactPhoneOutlined';
 
 export default function Forms() {
   const navigate = useNavigate();
@@ -16,6 +20,7 @@ export default function Forms() {
     gender: "",
     phoneNumber:""
   });
+  
 
   const [currentTab, setCurrentTab] = useState("step1");
 
@@ -101,22 +106,24 @@ export default function Forms() {
           {currentTab == "step1" ?
             <Grid container spacing={2}>
               <Grid item xs={12} lg={12} className="d-flex justify-content-center align-items-center gap-10px">
-                <TextField name="firstname" onChange={e => handleChange(e)} value={formData.firstname} label="First Name" fullWidth variant="outlined" placeholder="First Name" autoFocus
+                <TextField name="firstname" onChange={e => handleChange(e)} value={formData.firstname} label="First Name" fullWidth variant="outlined" placeholder="Enter First Name" autoFocus
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
                         {/* <LockIcon /> */}
+                        <AccountCircleOutlinedIcon/>
                       </InputAdornment>
                     ),
                   }} />
                 <img src={imgUrl.voiceIcon} className="voiceIcon"></img>
               </Grid>
-              <Grid item xs={12} lg={12} className="d-flex justify-content-center align-items-center gap-10px">
-                <TextField name="lastName" value={formData.lastName} onChange={e => handleChange(e)} label="Last Name" fullWidth variant="outlined" placeholder="Last Name" autoFocus
+              <Grid item xs={12} lg={12} className="d-flex justify-content-center align-items-center gap-10px mt-10px">
+                <TextField name="lastName" value={formData.lastName} onChange={e => handleChange(e)} label="Last Name" fullWidth variant="outlined" placeholder="Enter Last Name" autoFocus
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
                         {/* <LockIcon /> */}
+                        <AccountCircleOutlinedIcon/>
                       </InputAdornment>
                     ),
                   }} />
@@ -132,26 +139,29 @@ export default function Forms() {
           {currentTab == "step2" ?
           <Grid container spacing={2}>
             <Grid item xs={12} className="d-flex justify-content-center align-items-center gap-10px">
-                <TextField name="gender" select onChange={e => handleChange(e)} value={formData.gender} label="Gender" fullWidth variant="outlined" placeholder="Gender" autoFocus
+                <TextField name="gender" select onChange={e => handleChange(e)} value={formData.gender} label="Gender" fullWidth variant="outlined" placeholder="Choose Gender" autoFocus
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
                         {/* <LockIcon /> */}
+                        <WcOutlinedIcon/>
                       </InputAdornment>
                     ),
                   }} >
-                    <MenuItem value="1">Male</MenuItem>
-                    <MenuItem value="2">Female</MenuItem>
-                    <MenuItem value="3">Other</MenuItem>
+                   {/* <MenuItem value="1" disabled selected sx={{ color: '#9e9e9e' }}>Choose Gender</MenuItem> */}
+                    <MenuItem value="2">Male</MenuItem>
+                    <MenuItem value="3">Female</MenuItem>
+                    <MenuItem value="4">Other</MenuItem>
                     </TextField>
                 <img src={imgUrl.voiceIcon} className="voiceIcon"></img>
               </Grid>
-            <Grid item xs={12} className="d-flex justify-content-center align-items-center gap-10px">
-              <TextField name="age" type="number" onChange={e => handleChange(e)} value={formData.age} label="Age" fullWidth variant="outlined" placeholder="Age" autoFocus
+            <Grid item xs={12} className="d-flex justify-content-center align-items-center gap-10px mt-10px">
+              <TextField name="age" type="number" onChange={e => handleChange(e)} value={formData.age} label="Age" fullWidth variant="outlined" placeholder="Enter Age" autoFocus
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
                       {/* <LockIcon /> */}
+                      <FamilyRestroomOutlinedIcon/>
                     </InputAdornment>
                   ),
                 }} />
@@ -185,11 +195,12 @@ export default function Forms() {
           {currentTab == "step3" ?
             <Grid container spacing={2}>
               <Grid item xs={12} className="d-flex justify-content-center align-items-center gap-10px">
-                <TextField name="phoneNumber" type="number" onChange={e => handleChange(e)} value={formData.phoneNumber} label="Phone Number" fullWidth variant="outlined" placeholder="Phone Number" autoFocus
+                <TextField name="phoneNumber" type="number" onChange={e => handleChange(e)} value={formData.phoneNumber} label="Phone Number" fullWidth variant="outlined" placeholder="Enter Phone Number" autoFocus
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
                         {/* <LockIcon /> */}
+                        <ContactPhoneOutlinedIcon/>
                       </InputAdornment>
                     ),
                   }} />
@@ -215,7 +226,7 @@ export default function Forms() {
                   Back 
                 </Button>
                 <Button onClick={handleSubmit} variant="contained" color="primary" fullWidth className="commonButton">
-                  Subimt <ArrowForwardOutlinedIcon></ArrowForwardOutlinedIcon>
+                  Submit <ArrowForwardOutlinedIcon></ArrowForwardOutlinedIcon>
                 </Button>
               </Grid>
             </Grid> : null}
