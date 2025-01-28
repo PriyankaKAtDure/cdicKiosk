@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Box, Typography, Grid, TextField, Button, MenuItem, InputAdornment, } from "@mui/material";
-import imgUrl from "./img/imgurl";
+import imgUrl from "../img/imgurl";
 import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
 import { ArrowBack, ArrowBackOutlined } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
@@ -70,6 +70,8 @@ export default function Forms() {
 
   return (
     <div className="patientbg patientMainSection">
+     <Grid container spacing ={0}>
+      <Grid item xs={1}>
       <div
         className="backButton">
         <Button
@@ -79,10 +81,16 @@ export default function Forms() {
         >
         </Button>
       </div>
-      <div className="patientLogo">
-        <img src={imgUrl.cdiclogo} className="main-logo" style={{ paddingTop: "17px" }}></img>
-      </div>
-      <Box p={4} className="patientbg">
+      </Grid>
+      <Grid item xs={10}>          
+        <div className="patientLogo">
+          <img src={imgUrl.cdiclogo} className="main-logo"></img>
+        </div>
+      </Grid>
+      <Grid item xs={1}></Grid>
+     </Grid>
+
+      <Box p={4} className="patientSection">
 
 
 
@@ -92,7 +100,7 @@ export default function Forms() {
           </Typography>
           {currentTab == "step1" ?
             <Grid container spacing={2}>
-              <Grid item xs={12} className="d-flex justify-content-center align-items-center gap-10px">
+              <Grid item xs={12} lg={12} className="d-flex justify-content-center align-items-center gap-10px">
                 <TextField name="firstname" onChange={e => handleChange(e)} value={formData.firstname} label="First Name" fullWidth variant="outlined" placeholder="First Name" autoFocus
                   InputProps={{
                     startAdornment: (
@@ -103,7 +111,7 @@ export default function Forms() {
                   }} />
                 <img src={imgUrl.voiceIcon} className="voiceIcon"></img>
               </Grid>
-              <Grid item xs={12} className="d-flex justify-content-center align-items-center gap-10px">
+              <Grid item xs={12} lg={12} className="d-flex justify-content-center align-items-center gap-10px">
                 <TextField name="lastName" value={formData.lastName} onChange={e => handleChange(e)} label="Last Name" fullWidth variant="outlined" placeholder="Last Name" autoFocus
                   InputProps={{
                     startAdornment: (
@@ -114,7 +122,7 @@ export default function Forms() {
                   }} />
                 <img src={imgUrl.voiceIcon} className="voiceIcon"></img>
               </Grid>
-              <Grid item xs={12} className="d-flex justify-content-center align-items-center ">
+              <Grid item xs={12} lg={12} className="d-flex justify-content-center align-items-center gap-10px">
                 <Button onClick={e => changeStep("step2")} variant="contained" color="primary" fullWidth className="commonButton">
                   Next <ArrowForwardOutlinedIcon></ArrowForwardOutlinedIcon>
                 </Button>
@@ -163,7 +171,7 @@ export default function Forms() {
             <MenuItem value="Other">Other</MenuItem>
           </TextField>
         </Grid> */}
-            <Grid item xs={12} className="d-flex justify-content-center align-items-center ">
+            <Grid item xs={12} className="d-flex justify-content-center align-items-center gap-10px">
             <Button onClick={e => changeStep("step1")} variant="contained" color="primary" fullWidth className="commonButton">
               <ArrowBackOutlined></ArrowBackOutlined>
                 Back 
@@ -201,7 +209,7 @@ export default function Forms() {
               <MenuItem value="Other">Other</MenuItem>
             </TextField>
           </Grid> */}
-              <Grid item xs={12} className="d-flex justify-content-center align-items-center ">
+              <Grid item xs={12} className="d-flex justify-content-center align-items-center gap-10px">
               <Button onClick={e => changeStep("step2")} variant="contained" color="primary" fullWidth className="commonButton">
                 <ArrowBackOutlined></ArrowBackOutlined>
                   Back 

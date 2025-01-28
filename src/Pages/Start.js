@@ -1,5 +1,5 @@
 import React from 'react';
-import imgUrl from "./img/imgurl";
+import imgUrl from "../img/imgurl";
 import { Button } from '@mui/material';
 import StartSharpIcon from '@mui/icons-material/StartSharp';
 import { useNavigate } from 'react-router-dom';

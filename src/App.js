@@ -1,8 +1,8 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Start from './Start';
-import Patient from './Patient';
-import Forms from './Forms';
+import Start from './Pages/Start';
+import Patient from './Pages/Patient';
+import Forms from './Pages/Forms';
 
 function App() {
   return (

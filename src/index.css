@@ -1,3 +1,9 @@
+@import "https://unpkg.com/apis-font/fonts/font.css";
+
+:root {
+  --var-nova-color: #001965;
+}
+
 body {
   margin: 0;
   font-family: "Apis", sans-serif !important;
@@ -10,7 +16,9 @@ body {
   font-family: "Apis", sans-serif !important;
 }
 
-@import "https://unpkg.com/apis-font/fonts/font.css";
+.cursor-pointer{
+  cursor: pointer;
+}
 
 .d-flex {
   display: flex;
@@ -36,6 +44,7 @@ body {
     background-size: cover;
     height: 100vh;
     background-image: url(.././src/img/langpage.jpg);
+    background-repeat: no-repeat;
     /* background-image:    linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(245, 246, 252, 0.52)),    url('.././src/img/langpage.jpg'); */
     display: flex
 ;
@@ -78,7 +87,7 @@ body {
 }
 
 .sub-heading{
-  color: #001965;
+  color: var(--var-nova-color);
   font-size: 14px;
   margin-top: 0px;
   margin-bottom: 2px;
@@ -86,13 +95,13 @@ body {
 
 .patientIcon {
   color: #fff !important;
-  background-color: #001965;
+  background-color: var(--var-nova-color);
     padding: 10px;
     border-radius: 50px;
 }
 
 .existingPatient {
-  color: #001965 !important;
+  color: var(--var-nova-color) !important;
   background-color: #fff;
 }
 
@@ -104,9 +113,9 @@ body {
 }
 
 .existing-button{
-   border-color: #001965 !important;
+   border-color: var(--var-nova-color) !important;
    color: #fff !important;
-   background-color: #001965 !important;
+   background-color: var(--var-nova-color) !important;
 }
 
 .existing-button svg{
@@ -114,7 +123,7 @@ body {
 } 
 
 .button-new {
-  background-color: #001965 !important;
+  background-color: var(--var-nova-color) !important;
 }
 
 .startSection{
@@ -147,12 +156,12 @@ body {
 {
   background-color: #ffffff78;
     box-shadow: none;
-  color: #001965;
+  color: var(--var-nova-color);
 }
 
 /* .patientbg svg{
   font-size: 80px;
-  color: #001965;
+  color: var(--var-nova-color);
 } */
 
 .start-button{
@@ -169,7 +178,8 @@ body {
 }
 
 .commonButton{
-  background-color: #001965 !important;
+  background-color: var(--var-nova-color) !important;
+  border-color: var(--var-nova-color);
   gap: 7px;
 }
 
@@ -206,4 +216,13 @@ body {
     justify-content: flex-start;
     align-items: center;
     width: 100%;
+}
+
+@media (min-width:1200px){
+  body{
+    margin: 0 auto;
+    max-width: 400px;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+}
 }
