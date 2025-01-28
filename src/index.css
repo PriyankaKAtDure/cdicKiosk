@@ -7,6 +7,7 @@
   --box-card-color: #ffffff78;
 
   --input-icon-color:#9a9694;
+  --header-bg-color:#5689bc;
 }
 
 *{
@@ -302,6 +303,10 @@ button.backButton{
 
 .phoneNumberSection{
   padding-left: 11px;
+}
+
+.existingPatientList{
+  background-color: var(--header-bg-color);
 }
 
 @media (min-width:1200px){

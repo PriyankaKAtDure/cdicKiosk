@@ -124,7 +124,7 @@ function ExistingPatient() {
         <Box mb={4} p={2} border="1px solid #e0e0e0" borderRadius={2} boxShadow={1} className="boxCard">
 
           <Grid container spacing={2}>
-            <Grid container spacing={0} className='mt-10px phoneNumberSection'>
+            <Grid container spacing={1} className='mt-10px phoneNumberSection'>
               <Grid item xs={3}>
               <TextField name="phoneCode" type="number" label="Code" fullWidth variant="outlined" placeholder="" autoFocus
                 InputProps={{
@@ -167,10 +167,10 @@ function ExistingPatient() {
             fullScreen
             open={open}
             onClose={handleClose}
-            TransitionComponent={Transition}
+            slots={Transition}
           >
             <AppBar sx={{ position: 'relative' }}>
-              <Toolbar>
+              <Toolbar className='existingPatientList'>
                 <IconButton
                   edge="start"
                   color="inherit"
@@ -194,9 +194,12 @@ function ExistingPatient() {
               </ListItemButton>
             </List>
           </Dialog>
+
+          
         </Box>
 
       </Box>
+      
     </div>
 
   )
