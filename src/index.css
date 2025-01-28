@@ -85,6 +85,10 @@ body {
   align-items: center;
 }
 
+.flex-direction-column{
+  flex-direction: column !important;
+}
+
 .gap-10px{
   gap: 10px;
 }
@@ -93,6 +97,13 @@ body {
   width:100%
 }
 
+.mt-0px{
+  margin-top: 0px;
+}
+
+.mb-0px{
+  margin-bottom: 0px;
+}
 .mt-10px{
   margin-top: 10px !important;
 }
@@ -103,6 +114,10 @@ body {
 
 .placeholder-input{
   color: var(--input-icon-color);
+}
+
+.MuiFormControl-root  label{
+  color: var(--var-nova-color);
 }
 
 
@@ -229,15 +244,24 @@ body {
 
 .boxCard{
   background-color: var(--box-card-color);
+  padding-top: 35px !important;
+  padding-bottom: 30px !important; 
 }
 
 .commonButton{
   background-color: var(--var-nova-color) !important;
-  border-color: var(--var-nova-color);
+  border: 1px solid var(--var-nova-color) !important;
   gap: 7px;
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: none !important;
+}
+
+button.backButton{
+  background-color: transparent !important;
+  border: 1px solid var(--var-nova-color) !important;
+  color: var(--var-nova-color) !important;
 }
 
 .patientMainSection .patientImg{

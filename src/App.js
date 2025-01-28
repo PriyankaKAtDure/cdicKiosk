@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Start from './Pages/Start';
 import Patient from './Pages/Patient';
 import Forms from './Pages/Forms';
+import ExistingPatient from './Pages/ExistingPatient';
 
 function App() {
   return (
@@ -13,6 +14,8 @@ function App() {
           <Route path="/" element={<Start />} />
           <Route path="/Patient" element={<Patient />} />
           <Route path="/Forms" element={<Forms />} />
+
+          <Route path="/ExistingPatient" element={<ExistingPatient />} />
           </Routes>
     
       </Router> 

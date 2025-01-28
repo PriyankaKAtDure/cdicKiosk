@@ -1,15 +1,23 @@
 import React, { useState } from "react";
-import { Box, Typography, Grid, TextField, Button, MenuItem, InputAdornment,styled } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Grid,
+  TextField,
+  Button,
+  MenuItem,
+  InputAdornment,
+} from "@mui/material";
 import imgUrl from "../img/imgurl";
-import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
+import ArrowForwardOutlinedIcon from "@mui/icons-material/ArrowForwardOutlined";
 import { ArrowBack, ArrowBackOutlined } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import WcOutlinedIcon from '@mui/icons-material/WcOutlined';
-import FamilyRestroomOutlinedIcon from '@mui/icons-material/FamilyRestroomOutlined';
-import ContactPhoneOutlinedIcon from '@mui/icons-material/ContactPhoneOutlined';
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import WcOutlinedIcon from "@mui/icons-material/WcOutlined";
+import FamilyRestroomOutlinedIcon from "@mui/icons-material/FamilyRestroomOutlined";
+import ContactPhoneOutlinedIcon from "@mui/icons-material/ContactPhoneOutlined";
 
 export default function Forms() {
   const navigate = useNavigate();
@@ -18,15 +26,15 @@ export default function Forms() {
     lastName: "",
     age: "",
     gender: "",
-    phoneNumber:""
+    phoneNumber: "",
   });
-  
 
   const [currentTab, setCurrentTab] = useState("step1");
 
   const changeStep = (step) => {
     setCurrentTab(step);
-  }
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -38,44 +46,54 @@ export default function Forms() {
   const handleSubmit = async () => {
     try {
       console.log("Form Data:", formData);
-      let inputJson = formData;
-      inputJson.timeIn ="1"
-      // Example API call
-      const response = await fetch("https://cdicuat.imonitorplus.com/service/api/filter/createBotRegistration", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Basic " + btoa("botUser1" + ":" + "Dure@2025"),
-        },
-        body: JSON.stringify(formData),
-      });
+      let inputJson = { ...formData, timeIn: "1" };
+      const response = await fetch(
+        "https://cdicuat.imonitorplus.com/service/api/filter/createBotRegistration",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Basic " + btoa("botUser1:Dure@2025"),
+          },
+          body: JSON.stringify(inputJson),
+        }
+      );
       if (response.ok) {
         const result = await response.json();
         console.log("Success:", result);
-        toast.success('🎉 Congratulations! You have been registered successfully with UIC : '+ response.uic, {
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          });
-          setTimeout(() => {
-            navigate("/patient"); // Navigate to the next page
-          }, 1000);
+        toast.success(
+          `🎉 Congratulations! You have been registered successfully with UIC: ${result.uic}`,
+          {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "light",
+          }
+        );
+        setTimeout(() => {
+          navigate("/patient");
+        }, 3000);
       } else {
+        toast.error("Error submitting form. Please try again.", {
+          position: "top-center",
+        });
         console.error("Error submitting form");
       }
     } catch (error) {
+      toast.error("An unexpected error occurred.", {
+        position: "top-center",
+      });
       console.error("Error:", error);
     }
   };
 
   return (
     <div className="patientbg patientMainSection">
-     <Grid container spacing ={0}>
+      <ToastContainer />
+      <Grid container spacing ={0}>
       <Grid item xs={1}>
       <div
         className="backButton">
@@ -97,12 +115,10 @@ export default function Forms() {
 
       <Box p={4} className="patientSection">
 
-
-
         <Box mb={4} p={2} border="1px solid #e0e0e0" borderRadius={2} boxShadow={1} className="boxCard">
-          <Typography variant="h6" mb={2}>
+          {/* <Typography variant="h6" mb={2}>
 
-          </Typography>
+          </Typography> */}
           {currentTab == "step1" ?
             <Grid container spacing={2}>
               <Grid item xs={12} lg={12} className="d-flex justify-content-center align-items-center gap-10px">
@@ -129,7 +145,7 @@ export default function Forms() {
                   }} />
                 <img src={imgUrl.voiceIcon} className="voiceIcon"></img>
               </Grid>
-              <Grid item xs={12} lg={12} className="d-flex justify-content-center align-items-center gap-10px">
+              <Grid item xs={12} lg={12} className="d-flex justify-content-center align-items-center gap-10px mt-10px">
                 <Button onClick={e => changeStep("step2")} variant="contained" color="primary" fullWidth className="commonButton">
                   Next <ArrowForwardOutlinedIcon></ArrowForwardOutlinedIcon>
                 </Button>
@@ -181,8 +197,8 @@ export default function Forms() {
             <MenuItem value="Other">Other</MenuItem>
           </TextField>
         </Grid> */}
-            <Grid item xs={12} className="d-flex justify-content-center align-items-center gap-10px">
-            <Button onClick={e => changeStep("step1")} variant="contained" color="primary" fullWidth className="commonButton">
+            <Grid item xs={12} className="d-flex justify-content-center align-items-center gap-10px mt-10px">
+            <Button onClick={e => changeStep("step1")} variant="contained" color="primary" fullWidth className="commonButton backButton">
               <ArrowBackOutlined></ArrowBackOutlined>
                 Back 
               </Button>
@@ -194,7 +210,7 @@ export default function Forms() {
 
           {currentTab == "step3" ?
             <Grid container spacing={2}>
-              <Grid item xs={12} className="d-flex justify-content-center align-items-center gap-10px">
+              <Grid item xs={12} className="d-flex justify-content-center align-items-center gap-10px mt-10px">
                 <TextField name="phoneNumber" type="number" onChange={e => handleChange(e)} value={formData.phoneNumber} label="Phone Number" fullWidth variant="outlined" placeholder="Enter Phone Number" autoFocus
                   InputProps={{
                     startAdornment: (
@@ -220,8 +236,8 @@ export default function Forms() {
               <MenuItem value="Other">Other</MenuItem>
             </TextField>
           </Grid> */}
-              <Grid item xs={12} className="d-flex justify-content-center align-items-center gap-10px">
-              <Button onClick={e => changeStep("step2")} variant="contained" color="primary" fullWidth className="commonButton">
+              <Grid item xs={12} className="d-flex justify-content-center align-items-center gap-10px mt-10px">
+              <Button onClick={e => changeStep("step2")} variant="contained" color="primary" fullWidth className="commonButton backButton">
                 <ArrowBackOutlined></ArrowBackOutlined>
                   Back 
                 </Button>

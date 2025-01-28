@@ -52,7 +52,7 @@ export default function Patient() {
             </Grid>
 
             {/* Existing Patient Card */}
-            <Grid item xs={9} sm={9} md={9} className="cursor-pointer">
+            <Grid item xs={9} sm={9} md={9} onClick={() => navigate("/existingpatient")} className="cursor-pointer">
               <Card sx={{ border: "1px solid #e0e0e0", borderRadius: 2, boxShadow: 2 }}>
                 <CardContent>
                   <Box display="flex" flexDirection="column" alignItems="center" gap={1}>
