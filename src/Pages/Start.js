@@ -14,7 +14,7 @@ function Start() {
       <Button variant="outlined" color="primary" fullWidth className="existing-button" onClick={() => navigate("/patient")}>
                 Start <StartSharpIcon className='iconimg'/>
               </Button>
-              <img src={imgUrl.voiceIcon}></img>
+              {/* <img src={imgUrl.voiceIcon}></img> */}
               </div>
     </div>
   )

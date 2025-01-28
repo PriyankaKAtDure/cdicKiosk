@@ -309,6 +309,14 @@ button.backButton{
   background-color: var(--header-bg-color);
 }
 
+.voiceFixIcon{
+  position: fixed;
+    z-index: 9;
+    bottom: 20px;
+    right: 24px;
+    height: auto;
+}
+
 @media (min-width:1200px){
   body{
     margin: 0 auto;

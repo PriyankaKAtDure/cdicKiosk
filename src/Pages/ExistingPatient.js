@@ -146,7 +146,7 @@ function ExistingPatient() {
                     </InputAdornment>
                   ),
                 }} />
-              <img src={imgUrl.voiceIcon} className="voiceIcon"></img>
+              {/* <img src={imgUrl.voiceIcon} className="voiceIcon"></img> */}
                 </Grid>
             </Grid>
            

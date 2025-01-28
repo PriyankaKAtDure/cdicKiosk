@@ -7,6 +7,7 @@ const imgUrl  ={
   'qrCode' : require('../img/qr-code.png'),
   'generateReport': require('../img/generate-report.png'),
   'patientSummary': require('../img/patient-summary.png'),
+  'voiceAudioIcon': require('../img/voice.png'),
 }
 
 export default imgUrl;

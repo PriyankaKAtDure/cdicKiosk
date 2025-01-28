@@ -67,6 +67,9 @@ export default function Patient() {
             </Grid>
           </Grid>
         </Box>
+        <div className="voiceFixIcon">
+          <img src={imgUrl.voiceAudioIcon} className=""/>
+        </div>
       </div>
     </>
   );

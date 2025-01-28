@@ -131,7 +131,7 @@ export default function Forms() {
                       </InputAdornment>
                     ),
                   }} />
-                <img src={imgUrl.voiceIcon} className="voiceIcon"></img>
+                {/* <img src={imgUrl.voiceIcon} className="voiceIcon"></img> */}
               </Grid>
               <Grid item xs={12} lg={12} className="d-flex justify-content-center align-items-center gap-10px mt-10px">
                 <TextField name="lastName" value={formData.lastName} onChange={e => handleChange(e)} label="Last Name" fullWidth variant="outlined" placeholder="Enter Last Name" autoFocus
@@ -143,7 +143,7 @@ export default function Forms() {
                       </InputAdornment>
                     ),
                   }} />
-                <img src={imgUrl.voiceIcon} className="voiceIcon"></img>
+                {/* <img src={imgUrl.voiceIcon} className="voiceIcon"></img> */}
               </Grid>
               <Grid item xs={12} lg={12} className="d-flex justify-content-center align-items-center gap-10px mt-10px">
                 <Button onClick={e => changeStep("step2")} variant="contained" color="primary" fullWidth className="commonButton">
@@ -169,7 +169,7 @@ export default function Forms() {
                     <MenuItem value="3">Female</MenuItem>
                     <MenuItem value="4">Other</MenuItem>
                     </TextField>
-                <img src={imgUrl.voiceIcon} className="voiceIcon"></img>
+                {/* <img src={imgUrl.voiceIcon} className="voiceIcon"></img> */}
               </Grid>
             <Grid item xs={12} className="d-flex justify-content-center align-items-center gap-10px mt-10px">
               <TextField name="age" type="number" onChange={e => handleChange(e)} value={formData.age} label="Age" fullWidth variant="outlined" placeholder="Enter Age" autoFocus
@@ -181,7 +181,7 @@ export default function Forms() {
                     </InputAdornment>
                   ),
                 }} />
-              <img src={imgUrl.voiceIcon} className="voiceIcon"></img>
+              {/* <img src={imgUrl.voiceIcon} className="voiceIcon"></img> */}
             </Grid>
             {/* 
         <Grid item xs={12}>
@@ -220,7 +220,7 @@ export default function Forms() {
                       </InputAdornment>
                     ),
                   }} />
-                <img src={imgUrl.voiceIcon} className="voiceIcon"></img>
+                {/* <img src={imgUrl.voiceIcon} className="voiceIcon"></img> */}
               </Grid>
               {/* 
           <Grid item xs={12}>
