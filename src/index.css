@@ -300,6 +300,10 @@ button.backButton{
     width: 100%;
 }
 
+.phoneNumberSection{
+  padding-left: 11px;
+}
+
 @media (min-width:1200px){
   body{
     margin: 0 auto;

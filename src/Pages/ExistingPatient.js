@@ -124,18 +124,32 @@ function ExistingPatient() {
         <Box mb={4} p={2} border="1px solid #e0e0e0" borderRadius={2} boxShadow={1} className="boxCard">
 
           <Grid container spacing={2}>
-            <Grid item xs={12} lg={12} className="d-flex justify-content-center align-items-center gap-10px">
-              <TextField name="phoneNumber" type="number" onChange={e => handleChange(e)} label="Phone Number" value={formData.phoneNumber} fullWidth variant="outlined" placeholder="Enter Phone Number" autoFocus
+            <Grid container spacing={0} className='mt-10px phoneNumberSection'>
+              <Grid item xs={3}>
+              <TextField name="phoneCode" type="number" label="Code" fullWidth variant="outlined" placeholder="" autoFocus
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
                       {/* <LockIcon /> */}
-                      <ContactPhoneOutlinedIcon />
+                      {/* <ContactPhoneOutlinedIcon /> */}
+                    </InputAdornment>
+                  ),
+                }} />
+              </Grid>
+                <Grid item xs={9} lg={9} className="d-flex justify-content-center align-items-center gap-10px">
+              <TextField name="phoneNumber" type="number" onChange={e => handleChange(e)} label="Phone Number" value={formData.phoneNumber} fullWidth variant="outlined" placeholder="Enter Phone No" autoFocus
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      {/* <LockIcon /> */}
+                      {/* <ContactPhoneOutlinedIcon /> */}
                     </InputAdornment>
                   ),
                 }} />
               <img src={imgUrl.voiceIcon} className="voiceIcon"></img>
+                </Grid>
             </Grid>
+           
             <Grid item xs={12} lg={12} className="d-flex justify-content-center align-items-center flex-direction-column gap-10px">
               <h5 className='mt-0px mb-0px'>OR</h5>
               <div>
