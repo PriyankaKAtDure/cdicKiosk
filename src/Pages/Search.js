@@ -42,7 +42,7 @@ export default function Search() {
                 <CardContent>
                   <Box display="flex" flexDirection="column" alignItems="center" gap={1}>
                     {/* <PersonAdd fontSize="large" color="primary" /> */}
-                    <img src={imgUrl.patientnews} className="patientImg"></img>
+                    <img src={imgUrl.generateReport} className="patientImg" style={{width:"45%"}}></img>
                     <Typography variant="h6" fontWeight="bold">
                       Generate Report
                     </Typography>
@@ -57,7 +57,7 @@ export default function Search() {
                 <CardContent>
                   <Box display="flex" flexDirection="column" alignItems="center" gap={1}>
                     {/* <Person fontSize="large" color="primary" /> */}
-                    <img src={imgUrl.existingpatient} className="patientImg"></img>
+                    <img src={imgUrl.patientSummary} className="patientImg"></img>
                     <Typography variant="h6" fontWeight="bold">
                     Patient Summary
                     </Typography>
