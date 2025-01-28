@@ -318,7 +318,8 @@ button.backButton{
 }
 
 @media (min-width:1200px){
-  body{
+  body,
+  .dialog-box{
     margin: 0 auto;
     max-width: 400px;
     border-left: 1px solid var(--color-white);

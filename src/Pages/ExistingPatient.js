@@ -168,6 +168,7 @@ function ExistingPatient() {
             open={open}
             onClose={handleClose}
             slots={Transition}
+            className='dialog-box'
           >
             <AppBar sx={{ position: 'relative' }}>
               <Toolbar className='existingPatientList'>
