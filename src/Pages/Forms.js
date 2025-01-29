@@ -93,7 +93,7 @@ export default function Forms() {
   return (
     <div className="patientbg patientMainSection">
       <ToastContainer />
-      <Grid container spacing ={0}>
+      <Grid container spacing ={0} className="patientHeaderSection">
       <Grid item xs={1}>
       <div
         className="backButton">
