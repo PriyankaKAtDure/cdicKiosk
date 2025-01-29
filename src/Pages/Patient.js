@@ -79,6 +79,7 @@ export default function Patient() {
         <div className="voiceFixIcon">
           
           <img src={imgUrl.voiceAudioIcon} className=""/>
+    \
         </div>
       </div>
     </>

@@ -42,7 +42,7 @@ export default function Search() {
                 <CardContent>
                   <Box display="flex" flexDirection="column" alignItems="center" gap={1}>
                     {/* <PersonAdd fontSize="large" color="primary" /> */}
-                    {/* <img src={imgUrl.generateReport} className="patientImg" style={{width:"45%"}}></img> */}
+                    <img src={imgUrl.generateReport} className="patientImg" style={{width:"45%"}}></img>
                     
                     <Typography variant="h6" fontWeight="bold">
                       Generate Report

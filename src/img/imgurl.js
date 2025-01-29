@@ -5,7 +5,7 @@ const imgUrl  ={
   'patientnews': require('../img/new-patient.png'),
   'existingpatient': require('../img/existing-patient.png'),
   'qrCode' : require('../img/qr-code.png'),
-  'generateReport': require('../img/report.svg'),
+  'generateReport': require('../img/generate-report.png'),
   'patientSummary': require('../img/patient-summary.png'),
   'voiceAudioIcon': require('../img/voiceIcon.gif'),
 }
