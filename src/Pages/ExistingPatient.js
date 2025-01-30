@@ -30,7 +30,8 @@ import "react-toastify/dist/ReactToastify.css";
 function ExistingPatient() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    phoneNumber: ""
+    phoneNumber: "",
+    phoneCode:""
   });
   const [userList, setUserList] = useState([]);
   const handleChange = (e) => {
@@ -44,14 +45,15 @@ function ExistingPatient() {
   const handleSubmit = async () => {
     try {
       console.log("Form Data:", formData);
-      formData.phoneNumber = "+" + formData.phoneNumber;
       const response = await fetch("https://cdicuat.imonitorplus.com/service/api/filter/getUser", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "Authorization": "Basic " + btoa("botUser1" + ":" + "Dure@2025"),
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          "phoneNumber":"+" + formData.phoneCode + formData.phoneNumber
+        }),
       });
       if (response.ok) {
         const result = await response.json();
@@ -59,6 +61,10 @@ function ExistingPatient() {
         if(result.userList.length > 0){
           setUserList(result.userList)
           handleClickOpen();
+          setFormData({
+            phoneCode:"",
+            phoneNumber: ""
+          })
         }else{
           toast.info('No record found', {
             position: "top-center",
@@ -71,6 +77,7 @@ function ExistingPatient() {
             theme: "light",
             });
             setFormData({
+              phoneCode:"",
               phoneNumber: ""
             })
         }
@@ -126,7 +133,7 @@ function ExistingPatient() {
           <Grid container spacing={2}>
             <Grid container spacing={1} className='mt-10px phoneNumberSection'>
               <Grid item xs={3}>
-              <TextField name="phoneCode" type="number" label="Code" fullWidth variant="outlined" placeholder="" autoFocus
+              <TextField name="phoneCode" type="number" onChange={e => handleChange(e)} value={formData.phoneCode} label="Code" fullWidth variant="outlined" placeholder="Code" autoFocus
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -185,15 +192,20 @@ function ExistingPatient() {
                 </Typography>
               </Toolbar>
             </AppBar>
-            
+            {userList.length>0 ? 
             <List>
-              <ListItemButton>
-                <ListItemText primary="Phone ringtone" secondary="Titania" />
-              </ListItemButton>
-              <Divider />
-              <ListItemButton>
-              </ListItemButton>
-            </List>
+              {userList.map((user,idx) => {
+                return (
+                  <>
+                  <ListItemButton onClick={e =>{ navigate("/search");}} key={idx}>
+                      <ListItemText primary={user.patientName} secondary={user.patientId} />
+                    </ListItemButton>
+                    <Divider />
+                  </>
+                )
+              })}
+          </List>
+          : null}
           </Dialog>
 
           

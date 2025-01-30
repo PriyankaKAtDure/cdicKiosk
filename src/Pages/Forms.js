@@ -47,6 +47,8 @@ export default function Forms() {
     try {
       console.log("Form Data:", formData);
       let inputJson = { ...formData, timeIn: "1" };
+      inputJson["phoneNumber"] = formData["phoneCode"] + formData["phoneNumber"]
+      console.log("Form Data:", inputJson);
       const response = await fetch(
         "https://cdicuat.imonitorplus.com/service/api/filter/createBotRegistration",
         {
@@ -93,25 +95,25 @@ export default function Forms() {
   return (
     <div className="patientbg patientMainSection">
       <ToastContainer />
-      <Grid container spacing ={0} className="patientHeaderSection">
-      <Grid item xs={1}>
-      <div
-        className="backButton">
-        <Button
-          startIcon={<ArrowBack />}
-          onClick={() => navigate(-1)} // Navigate to the previous page
-        // sx={{ mb: 2 }}
-        >
-        </Button>
-      </div>
+      <Grid container spacing={0} className="patientHeaderSection">
+        <Grid item xs={1}>
+          <div
+            className="backButton">
+            <Button
+              startIcon={<ArrowBack />}
+              onClick={() => navigate(-1)} // Navigate to the previous page
+            // sx={{ mb: 2 }}
+            >
+            </Button>
+          </div>
+        </Grid>
+        <Grid item xs={10}>
+          <div className="patientLogo">
+            <img src={imgUrl.cdiclogo} className="main-logo"></img>
+          </div>
+        </Grid>
+        <Grid item xs={1}></Grid>
       </Grid>
-      <Grid item xs={10}>          
-        <div className="patientLogo">
-          <img src={imgUrl.cdiclogo} className="main-logo"></img>
-        </div>
-      </Grid>
-      <Grid item xs={1}></Grid>
-     </Grid>
 
       <Box p={4} className="patientSection">
 
@@ -127,19 +129,7 @@ export default function Forms() {
                     startAdornment: (
                       <InputAdornment position="start">
                         {/* <LockIcon /> */}
-                        <AccountCircleOutlinedIcon/>
-                      </InputAdornment>
-                    ),
-                  }} />
-                {/* <img src={imgUrl.voiceIcon} className="voiceIcon"></img> */}
-              </Grid>
-              <Grid item xs={12} lg={12} className="d-flex justify-content-center align-items-center gap-10px mt-10px">
-                <TextField name="lastName" value={formData.lastName} onChange={e => handleChange(e)} label="Last Name" fullWidth variant="outlined" placeholder="Enter Last Name" autoFocus
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        {/* <LockIcon /> */}
-                        <AccountCircleOutlinedIcon/>
+                        <AccountCircleOutlinedIcon />
                       </InputAdornment>
                     ),
                   }} />
@@ -153,37 +143,25 @@ export default function Forms() {
             </Grid> : null}
 
           {currentTab == "step2" ?
-          <Grid container spacing={2}>
-            <Grid item xs={12} className="d-flex justify-content-center align-items-center gap-10px">
+            <Grid container spacing={2}>
+              <Grid item xs={12} className="d-flex justify-content-center align-items-center gap-10px">
                 <TextField name="gender" select onChange={e => handleChange(e)} value={formData.gender} label="Gender" fullWidth variant="outlined" placeholder="Choose Gender" autoFocus
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
                         {/* <LockIcon /> */}
-                        <WcOutlinedIcon/>
+                        <WcOutlinedIcon />
                       </InputAdornment>
                     ),
                   }} >
-                   {/* <MenuItem value="1" disabled selected sx={{ color: '#9e9e9e' }}>Choose Gender</MenuItem> */}
-                    <MenuItem value="2">Male</MenuItem>
-                    <MenuItem value="3">Female</MenuItem>
-                    <MenuItem value="4">Other</MenuItem>
-                    </TextField>
+                  {/* <MenuItem value="1" disabled selected sx={{ color: '#9e9e9e' }}>Choose Gender</MenuItem> */}
+                  <MenuItem value="2">Male</MenuItem>
+                  <MenuItem value="3">Female</MenuItem>
+                  <MenuItem value="4">Other</MenuItem>
+                </TextField>
                 {/* <img src={imgUrl.voiceIcon} className="voiceIcon"></img> */}
               </Grid>
-            <Grid item xs={12} className="d-flex justify-content-center align-items-center gap-10px mt-10px">
-              <TextField name="age" type="number" onChange={e => handleChange(e)} value={formData.age} label="Age" fullWidth variant="outlined" placeholder="Enter Age" autoFocus
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      {/* <LockIcon /> */}
-                      <FamilyRestroomOutlinedIcon/>
-                    </InputAdornment>
-                  ),
-                }} />
-              {/* <img src={imgUrl.voiceIcon} className="voiceIcon"></img> */}
-            </Grid>
-            {/* 
+              {/* 
         <Grid item xs={12}>
           <TextField
             label="Gender"
@@ -197,30 +175,82 @@ export default function Forms() {
             <MenuItem value="Other">Other</MenuItem>
           </TextField>
         </Grid> */}
-            <Grid item xs={12} className="d-flex justify-content-center align-items-center gap-10px mt-10px">
-            <Button onClick={e => changeStep("step1")} variant="contained" color="primary" fullWidth className="commonButton backButton">
-              <ArrowBackOutlined></ArrowBackOutlined>
-                Back 
-              </Button>
-              <Button onClick={e => changeStep("step3")} variant="contained" color="primary" fullWidth className="commonButton">
-                Next <ArrowForwardOutlinedIcon></ArrowForwardOutlinedIcon>
-              </Button>
-            </Grid>
-          </Grid> : null}
+              <Grid item xs={12} className="d-flex justify-content-center align-items-center gap-10px mt-10px">
+                <Button onClick={e => changeStep("step1")} variant="contained" color="primary" fullWidth className="commonButton backButton">
+                  <ArrowBackOutlined></ArrowBackOutlined>
+                  Back
+                </Button>
+                <Button onClick={e => changeStep("step3")} variant="contained" color="primary" fullWidth className="commonButton">
+                  Next <ArrowForwardOutlinedIcon></ArrowForwardOutlinedIcon>
+                </Button>
+              </Grid>
+            </Grid> : null}
 
           {currentTab == "step3" ?
             <Grid container spacing={2}>
               <Grid item xs={12} className="d-flex justify-content-center align-items-center gap-10px mt-10px">
-                <TextField name="phoneNumber" type="number" onChange={e => handleChange(e)} value={formData.phoneNumber} label="Phone Number" fullWidth variant="outlined" placeholder="Enter Phone Number" autoFocus
+                <TextField name="age" type="number" onChange={e => handleChange(e)} value={formData.age} label="Age" fullWidth variant="outlined" placeholder="Enter Age" autoFocus
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
                         {/* <LockIcon /> */}
-                        <ContactPhoneOutlinedIcon/>
+                        <FamilyRestroomOutlinedIcon />
                       </InputAdornment>
                     ),
                   }} />
                 {/* <img src={imgUrl.voiceIcon} className="voiceIcon"></img> */}
+              </Grid>
+              {/* 
+        <Grid item xs={12}>
+          <TextField
+            label="Gender"
+            select
+            fullWidth
+            variant="outlined"
+            defaultValue=""
+          >
+            <MenuItem value="Male">Male</MenuItem>
+            <MenuItem value="Female">Female</MenuItem>
+            <MenuItem value="Other">Other</MenuItem>
+          </TextField>
+        </Grid> */}
+              <Grid item xs={12} className="d-flex justify-content-center align-items-center gap-10px mt-10px">
+                <Button onClick={e => changeStep("step2")} variant="contained" color="primary" fullWidth className="commonButton backButton">
+                  <ArrowBackOutlined></ArrowBackOutlined>
+                  Back
+                </Button>
+                <Button onClick={e => changeStep("step4")} variant="contained" color="primary" fullWidth className="commonButton">
+                  Next <ArrowForwardOutlinedIcon></ArrowForwardOutlinedIcon>
+                </Button>
+              </Grid>
+            </Grid> : null}
+
+          {currentTab == "step4" ?
+            <Grid container spacing={2}>
+              <Grid container spacing={1} className='mt-10px phoneNumberSection'>
+                <Grid item xs={3}>
+                  <TextField name="phoneCode" type="number" onChange={e => handleChange(e)} value={formData.phoneCode} label="Code" fullWidth variant="outlined" placeholder="Code" autoFocus
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          {/* <LockIcon /> */}
+                          {/* <ContactPhoneOutlinedIcon /> */}
+                        </InputAdornment>
+                      ),
+                    }} />
+                </Grid>
+                <Grid item xs={9} lg={9} className="d-flex justify-content-center align-items-center gap-10px">
+                  <TextField name="phoneNumber" type="number" onChange={e => handleChange(e)} label="Phone Number" value={formData.phoneNumber} fullWidth variant="outlined" placeholder="Enter Phone No" autoFocus
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          {/* <LockIcon /> */}
+                          {/* <ContactPhoneOutlinedIcon /> */}
+                        </InputAdornment>
+                      ),
+                    }} />
+                  {/* <img src={imgUrl.voiceIcon} className="voiceIcon"></img> */}
+                </Grid>
               </Grid>
               {/* 
           <Grid item xs={12}>
@@ -237,9 +267,9 @@ export default function Forms() {
             </TextField>
           </Grid> */}
               <Grid item xs={12} className="d-flex justify-content-center align-items-center gap-10px mt-10px">
-              <Button onClick={e => changeStep("step2")} variant="contained" color="primary" fullWidth className="commonButton backButton">
-                <ArrowBackOutlined></ArrowBackOutlined>
-                  Back 
+                <Button onClick={e => changeStep("step3")} variant="contained" color="primary" fullWidth className="commonButton backButton">
+                  <ArrowBackOutlined></ArrowBackOutlined>
+                  Back
                 </Button>
                 <Button onClick={handleSubmit} variant="contained" color="primary" fullWidth className="commonButton">
                   Submit <ArrowForwardOutlinedIcon></ArrowForwardOutlinedIcon>
