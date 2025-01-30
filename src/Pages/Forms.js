@@ -155,9 +155,9 @@ export default function Forms() {
                     ),
                   }} >
                   {/* <MenuItem value="1" disabled selected sx={{ color: '#9e9e9e' }}>Choose Gender</MenuItem> */}
-                  <MenuItem value="2">Male</MenuItem>
-                  <MenuItem value="3">Female</MenuItem>
-                  <MenuItem value="4">Other</MenuItem>
+                  <MenuItem value="1">Male</MenuItem>
+                  <MenuItem value="2">Female</MenuItem>
+                  <MenuItem value="3">Other</MenuItem>
                 </TextField>
                 {/* <img src={imgUrl.voiceIcon} className="voiceIcon"></img> */}
               </Grid>
