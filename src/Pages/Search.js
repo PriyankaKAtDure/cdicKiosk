@@ -37,12 +37,12 @@ export default function Search() {
           <Grid container spacing={2} justifyContent="center" className="">
             {/* New Patient Card */}
 
-            <Grid item xs={9} sm={9} md={9} onClick={() => navigate("/")} className="cursor-pointer">
+            <Grid item xs={12} sm={12} md={12} onClick={() => navigate("/")} className="cursor-pointer">
               <Card sx={{ bgcolor: "#f8fbff", borderRadius: 2, boxShadow: 2 }}>
                 <CardContent>
                   <Box display="flex" flexDirection="column" alignItems="center" gap={1}>
                     {/* <PersonAdd fontSize="large" color="primary" /> */}
-                    <img src={imgUrl.generateReport} className="patientImg" style={{width:"45%"}}></img>
+                    <img src={imgUrl.generateReport} className="patientImg"></img>
                     
                     <Typography variant="h6" fontWeight="bold">
                       Generate Report

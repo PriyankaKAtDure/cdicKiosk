@@ -207,9 +207,10 @@ body {
 }
 
 .existing-button{
-   border-color: var(--var-nova-color) !important;
+   border-color: var(--header-bg-color) !important;
    color: var(--color-white) !important;
-   background-color: var(--var-nova-color) !important;
+   background-color: var(--header-bg-color) !important;
+   line-height: inherit !important;
 }
 
 .existing-button svg{
@@ -369,7 +370,8 @@ button.backButton{
   margin-top: 56px;
 }
 
-.patientbg .patientLogo .main-logo {
+.patientbg .patientLogo .main-logo,
+.patientbg .main-logo {
   background-color: #fff;
     padding: 9px;
     border-radius: 15px;

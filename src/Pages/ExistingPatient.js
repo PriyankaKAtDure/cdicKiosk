@@ -151,7 +151,7 @@ function ExistingPatient() {
             </Grid>
            
             <Grid item xs={12} lg={12} className="d-flex justify-content-center align-items-center flex-direction-column gap-10px">
-              <h5 className='mt-0px mb-0px color-white'>OR</h5>
+              <h5 className='mt-0px mb-0px color-white  '>OR</h5>
               <div>
                 <img src={imgUrl.qrCode} className=""></img>
               </div>
