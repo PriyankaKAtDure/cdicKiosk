@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "./static/css/main.34bedd4a.css",
+    "main.js": "./static/js/main.245ae563.js",
+    "static/media/new-patient.png": "./static/media/new-patient.fb3229e999437e31a0b4.png",
+    "static/media/logo.png": "./static/media/logo.bdbf34ee648001dda554.png",
+    "static/media/langpage.jpg": "./static/media/langpage.24f7fbf38c8f0fbe23cf.jpg",
+    "static/media/existing-patient.png": "./static/media/existing-patient.ee29ae67b3212f945227.png",
+    "index.html": "./index.html",
+    "main.34bedd4a.css.map": "./static/css/main.34bedd4a.css.map",
+    "main.245ae563.js.map": "./static/js/main.245ae563.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.34bedd4a.css",
+    "static/js/main.245ae563.js"
+  ]
+}
