@@ -168,7 +168,7 @@ body {
 }
 
 .main-logo {
-  width: 80% !important;
+  width: 50% !important;
   max-width: 100%;
   height: auto;
 }
@@ -211,6 +211,8 @@ body {
    color: var(--color-white) !important;
    background-color: var(--header-bg-color) !important;
    line-height: inherit !important;
+   border-radius: 50px !important;
+   width: 70% !important;
 }
 
 .existing-button svg{
@@ -277,6 +279,7 @@ body {
   justify-content: center;
   align-items: center;
   box-shadow: none !important;
+  border-radius: 50px !important;
 }
 
 button.backButton{
@@ -370,12 +373,12 @@ button.backButton{
   margin-top: 56px;
 }
 
-.patientbg .patientLogo .main-logo,
+/* .patientbg .patientLogo .main-logo,
 .patientbg .main-logo {
   background-color: #fff;
     padding: 9px;
     border-radius: 15px;
-}
+} */
 
 .patientSection .MuiTypography-root.mainHeading{
   font-size: 26px;
