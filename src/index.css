@@ -421,4 +421,8 @@ button.backButton{
     border-left: 1px solid var(--color-white);
     border-right: 1px solid var(--color-white);
 }
+
+.voiceFixIcon{
+  position: static;
+}
 }
