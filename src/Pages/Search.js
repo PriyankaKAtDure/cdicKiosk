@@ -1,8 +1,9 @@
 import React from "react";
 import { Box, Typography, Grid, Card, CardContent, Button } from "@mui/material";
-import { PersonAdd, Person, ArrowBack } from "@mui/icons-material";
+import { PersonAdd, ArrowBack } from "@mui/icons-material";
 import { useNavigate } from 'react-router-dom';
 import imgUrl from "../img/imgurl";
+import videoFile from '../img/videobg.mp4'
 
 export default function Search() {
 
@@ -10,7 +11,8 @@ export default function Search() {
   return (
 
     <>
-      <div className="patientbg patientMainSection ">
+     <div className='position-relative'>
+      <div className="patientbg patientMainSection mainPatientLanding">
       <Grid container spacing={0} className="patientHeaderSection">
         <Grid items xs={1}>
         <div
@@ -42,11 +44,15 @@ export default function Search() {
                 <CardContent>
                   <Box display="flex" flexDirection="column" alignItems="center" gap={1}>
                     {/* <PersonAdd fontSize="large" color="primary" /> */}
-                    <img src={imgUrl.generateReport} className="patientImg"></img>
-                    
+                    <div className="">
                     <Typography variant="h6" fontWeight="bold">
-                      Generate Report
+                      Generate <br></br> Report
                     </Typography>
+                    </div>
+                    <div className="patientSecondDiv">
+                    <img src={imgUrl.generateReport} className="patientImg"></img>
+                    </div>
+                   
                   </Box>
                 </CardContent>
               </Card>
@@ -68,6 +74,10 @@ export default function Search() {
             </Grid>
           </Grid>
         </Box>
+      </div>
+       <video muted loop id="myVideo" autoPlay>
+                <source src={videoFile} type="video/mp4" />
+              </video>
       </div>
     </>
   );
