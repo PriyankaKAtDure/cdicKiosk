@@ -335,6 +335,10 @@ button.backButton{
   padding-left: 11px;
 }
 
+.phoneNumberSection .d-none{
+  display: none;
+}
+
 .existingPatientList{
   background-color: var(--header-bg-color);
 }

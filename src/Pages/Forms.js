@@ -231,8 +231,10 @@ export default function Forms() {
                 <Grid item xs={3}>
                   <TextField name="phoneCode" type="number" onChange={e => handleChange(e)} value={formData.phoneCode} label="Code" fullWidth variant="outlined" placeholder="Code" autoFocus
                     InputProps={{
+                      
                       startAdornment: (
-                        <InputAdornment position="start">
+                        <InputAdornment position="start" className="d-none">
+                        
                           {/* <LockIcon /> */}
                           {/* <ContactPhoneOutlinedIcon /> */}
                         </InputAdornment>
