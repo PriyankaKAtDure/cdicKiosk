@@ -564,7 +564,8 @@ body {
     border-right: 1px solid var(--color-white);
 }
 
-.voiceFixIcon{
+.voiceFixIcon,
+.voiceChatDialog{
   position: static;
 }
 }
