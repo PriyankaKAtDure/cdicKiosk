@@ -396,8 +396,24 @@ body {
   background-color: var(--header-bg-color);
 }
 
-.existingPatientList.existingDialog:nth-child(even) {
-  background-color: var(--var-blue-variation-color) !important;
+.existingDialog .MuiButtonBase-root:nth-of-type(even) {
+  background-color: var(--var-lightBluish-variation-color) !important;
+}
+
+.existingDialog .MuiButtonBase-root:nth-of-type(odd) {
+  background-color: var(--var-lightBlue-variation-color) !important;
+}
+
+.existingDialog .MuiList-root {
+  padding-top: 0px !important;
+}
+
+.existingDialog .MuiListItemText-root span{
+  color: var(--var-nova-color);
+}
+
+.existingDialog .MuiListItemText-root p{
+  color: var(--var-nova-color);
 }
 
 .voiceFixIcon{
