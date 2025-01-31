@@ -99,7 +99,7 @@ function ExistingPatient() {
   const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
-
+  
   return (
     <div className='position-relative'>
     <div className="patientbg patientMainSection existingMainSection">
