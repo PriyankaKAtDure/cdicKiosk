@@ -13,6 +13,9 @@
   --var-darkBlue-variation-color:#587aa3;
 
   --var-green-variation-color: #216e73;
+
+  --var-lightBlue-variation-color:#becbda;
+  --var-lightBluish-variation-color:#dce3eb;
   
 }
 
@@ -389,8 +392,12 @@ body {
   display: none;
 }
 
-.existingPatientList{
+.existingPatientList .MuiButtonBase-root.MuiListItemButton-root{
   background-color: var(--header-bg-color);
+}
+
+.existingPatientList.existingDialog:nth-child(even) {
+  background-color: var(--var-blue-variation-color) !important;
 }
 
 .voiceFixIcon{
@@ -500,6 +507,14 @@ body {
 
 .existingMainSection .boxCard .MuiFormControl-root{
   margin-top: 10px;
+}
+
+.light-user-list {
+  background-color: var(--var-lightBlue-variation-color);
+}
+
+.light-user-oddList{
+  background-color: var(--var-lightBluish-variation-color);
 }
 
 @media (min-width:1200px){
