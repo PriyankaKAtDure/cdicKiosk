@@ -9,8 +9,8 @@ import CloseIcon from '@mui/icons-material/Close';
 export default function Patient() {
 
   const Transition = React.forwardRef(function Transition(props, ref) {
-      return <Slide direction="up" ref={ref} {...props} />;
-    });
+    return <Slide direction="up" ref={ref} {...props} />;
+  });
   // Code for Text-to-Speack
   const [text, setText] = useState("Hello, Please select your patient type , New or Exisiting");
   const [isReady, setIsReady] = useState(false);
@@ -156,7 +156,7 @@ export default function Patient() {
             <img src={imgUrl.voiceAudioIcon} onClick={e => {
               speakText()
               handleClickOpen()
-              }} className="" />
+            }} className="" />
           </div>
         </div>
         <video muted loop id="myVideo" autoPlay>
@@ -170,20 +170,23 @@ export default function Patient() {
           className='dialog-box'
         >
           <AppBar sx={{ position: 'relative' }}>
-              <Toolbar className='existingPatientList'>
-                <IconButton
-                  edge="start"
-                  color="inherit"
-                  onClick={handleClose}
-                  aria-label="close"
-                >
-                  <CloseIcon />
-                </IconButton>
-                <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-                  Voice Flow
-                </Typography>
-              </Toolbar>
-            </AppBar>
+            <Toolbar className='existingPatientList'>
+              <IconButton
+                edge="start"
+                color="inherit"
+                onClick={handleClose}
+                aria-label="close"
+              >
+                <CloseIcon />
+              </IconButton>
+              <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+                Voice Flow
+              </Typography>
+            </Toolbar>
+          </AppBar>
+          <video muted loop id="myVideo" autoPlay style={{zIndex:1}}>
+            <source src={videoFile} type="video/mp4"/>
+          </video>
 
         </Dialog>
       </div>
