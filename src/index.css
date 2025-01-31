@@ -8,12 +8,21 @@
 
   --input-icon-color:#9a9694;
   --header-bg-color:#5689bc;
+
+  --var-blue-variation-color:#6987ac;
+  --var-darkBlue-variation-color:#587aa3;
+
+  --var-green-variation-color: #216e73;
+  
 }
 
 *{
   font-family: var(--body-font-family) !important;
 }
 
+.position-relative{
+  position: relative;
+}
 
 /* width */
 ::-webkit-scrollbar {
@@ -141,7 +150,7 @@ body {
   background-position: center center;
     background-size: cover;
     height: 100vh;
-    background-image: url(.././src/img/langpage.png);
+    /* background-image: url(.././src/img/langpage.png); */
     background-repeat: no-repeat;
     /* background-image:    linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(245, 246, 252, 0.52)),    url('.././src/img/langpage.jpg'); */
     display: flex;
@@ -155,10 +164,16 @@ body {
 
 .patientSection {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   height: 75dvh;
   flex-direction: column;
+  background-color: var(--var-nova-color);
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-top: 65px !important;
 }
 
 .leftDiv{
@@ -246,7 +261,8 @@ body {
   background-color: transparent;
     box-shadow: none;
     color: #fff;
-    border: 1px solid #fff;
+    border: 1px solid var(--var-nova-color);
+    /* height: 231px; */
 }
 
 /* .patientbg svg{
@@ -261,50 +277,84 @@ body {
   gap: 8px;
   margin-top: 42px !important;
   width: 90%;
+  cursor: pointer;
 }
 
 .boxCard{
   /* background-color: var(--box-card-color); */
   background-color: transparent;
-  border: 1px solid #fff;
-  padding-top: 35px !important;
+  border-color: transparent !important;
+  padding-top: 50px !important;
   padding-bottom: 30px !important; 
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  box-shadow: none !important;
 }
 
+.boxCard label{
+  color: var(--color-white);
+}
+
+.boxCard .MuiInputBase-root{
+  border-radius: 15px;
+  background-color: var(--var-blue-variation-color) !important;
+}
+
+.boxCard .submitFormButton{
+  background-color: var(--var-green-variation-color) !important;
+}
+
+.boxCard .MuiInputBase-input{
+  padding-top: 14px;
+    padding-bottom: 11px;
+}
 .commonButton{
-  background-color: var(--header-bg-color) !important;
-  border: 1px solid var(--header-bg-color) !important;
+  background-color: var(--var-darkBlue-variation-color) !important;
+  border: 1px solid var(--var-darkBlue-variation-color) !important;
   gap: 7px;
   display: flex;
   justify-content: center;
   align-items: center;
   box-shadow: none !important;
-  border-radius: 50px !important;
+  border-radius: 25px !important;
   line-height:  inherit !important;
 }
 
-button.backButton{
+/* button.backButton{
   background-color: transparent !important;
   border: 1px solid var(--color-white) !important;
   color: var(--color-white) !important;
   line-height:  inherit !important;
-}
+} */
 
 .patientMainSection .patientImg{
   width: 80%;
 }
 
 .patientbg .MuiCardContent-root {
-  padding-bottom: 16px !important;
+  padding: 0px !important;
+}
+
+.patientbg .patientSecondDiv{
+  width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+
+    background-color: var(--var-nova-color);
 }
 
 .patientSection .MuiTypography-root{
-  font-size: 18px;
+  font-size: 24px;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 10px;
+  color: var(--var-nova-color);
 }
 
 .patientMainSection .patientLogo{
@@ -360,14 +410,14 @@ button.backButton{
 }
 
 .mainHeading {
-  color: var(--header-bg-color);
+  color: var(--var-nova-color);
   margin-bottom: 2px !important;
   font-weight: 600 !important;
 }
 
 .patientSection .subHeading{
-  font-size: 14px;
-    color: #fff;
+  font-size: 16px;
+    color: var(--var-nova-color);
     margin-top: 5px;
 }
 
@@ -377,6 +427,7 @@ button.backButton{
 
 .patientHeaderSection{
   margin-top: 56px;
+  margin-bottom: 56px;
 }
 
 /* .patientbg .patientLogo .main-logo,
@@ -391,7 +442,7 @@ button.backButton{
 }
 
 .backButton button{
-  color: var(--color-white);
+  color: var(--var-nova-color);
 }
 
 .patientbg .color-white{
@@ -399,7 +450,7 @@ button.backButton{
 }
 
 .patientbg .MuiOutlinedInput-notchedOutline{
-  border-color: var(--color-white) !important;
+  border-color: var(--var-blue-variation-color) !important;
 }
 
 .patientbg .MuiFormLabel-root.Mui-focused{
@@ -413,6 +464,44 @@ button.backButton{
 .searchReportSection{
   margin-top: 33px;
 }
+
+.start-button img{
+  max-width: 220px;
+}
+
+#myVideo {
+  /* width: 100%; */
+  /* height: 100%; */
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  object-fit: cover;
+}
+
+.mainPatientLanding .patientSection{
+  background-color: transparent !important;
+  padding-top: 32px !important;
+}
+.mainPatientLanding.mainPatientLanding .patientSection{
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.mainPatientLanding .patientHeaderSection{
+ margin-bottom: 0px !important;
+}
+
+.userButtonIcon{
+  width: 25%;
+}
+
+.existingMainSection .boxCard .MuiFormControl-root{
+  margin-top: 10px;
+}
+
 @media (min-width:1200px){
   body,
   .dialog-box{

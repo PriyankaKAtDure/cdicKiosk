@@ -3,19 +3,31 @@ import imgUrl from "../img/imgurl";
 import { Button } from '@mui/material';
 import StartSharpIcon from '@mui/icons-material/StartSharp';
 import { useNavigate } from 'react-router-dom';
+import videoFile  from '../img/videobg.mp4';
 
 function Start() {
 
     const navigate = useNavigate();
   return (
+    <div className='position-relative'>
     <div className='startSection patientbg'>
       <img src={imgUrl.cdiclogo} className="main-logo"></img>
       <div className='start-button'>
-      <Button variant="outlined" color="primary" fullWidth className="existing-button" onClick={() => navigate("/patient")}>
-                Start <StartSharpIcon className='iconimg'/>
-              </Button>
+
+      <img src={imgUrl.startButtonIcon} onClick={() => navigate("/patient")}></img>
+      {/* <Button variant="outlined" color="primary" fullWidth className="existing-button" >
+      <img src={imgUrl.startButtonIcon}></img>
+              <span>  Start  </span>
+              </Button> */}
               {/* <img src={imgUrl.voiceIcon}></img> */}
               </div>
+
+              
+    </div>
+    <video autoplay muted loop id="myVideo">
+        <source src={videoFile} type="video/mp4"/>
+      </video>
+
     </div>
   )
 }

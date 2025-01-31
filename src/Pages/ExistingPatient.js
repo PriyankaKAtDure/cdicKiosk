@@ -18,14 +18,13 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import imgUrl from "../img/imgurl";
-import ArrowForwardOutlinedIcon from "@mui/icons-material/ArrowForwardOutlined";
 import { ArrowBack, ArrowBackOutlined } from "@mui/icons-material";
-import ContactPhoneOutlinedIcon from "@mui/icons-material/ContactPhoneOutlined";
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import videoFile  from '../img/videobg.mp4';
 
 function ExistingPatient() {
   const navigate = useNavigate();
@@ -102,8 +101,8 @@ function ExistingPatient() {
   });
 
   return (
-
-    <div className="patientbg patientMainSection">
+    <div className='position-relative'>
+    <div className="patientbg patientMainSection existingMainSection">
       {/* back logo div */}
       <ToastContainer />
       <Grid container spacing={0} className="patientHeaderSection">
@@ -127,13 +126,14 @@ function ExistingPatient() {
       </Grid>
 
       <Box p={4} className="patientSection">
-
+      <img src={imgUrl.userButtonIcon} className="userButtonIcon"></img>
         <Box mb={4} p={2} border="1px solid #e0e0e0" borderRadius={2} boxShadow={1} className="boxCard">
 
           <Grid container spacing={2}>
             <Grid container spacing={1} className='mt-10px phoneNumberSection'>
               <Grid item xs={3}>
-              <TextField name="phoneCode" type="number" onChange={e => handleChange(e)} value={formData.phoneCode} label="Code" fullWidth variant="outlined" placeholder="Code" autoFocus
+              <label>Code</label>
+              <TextField name="phoneCode" type="number" onChange={e => handleChange(e)} value={formData.phoneCode} label="" fullWidth variant="outlined" placeholder="Code" autoFocus
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -143,8 +143,9 @@ function ExistingPatient() {
                   ),
                 }} />
               </Grid>
-                <Grid item xs={9} lg={9} className="d-flex justify-content-center align-items-center gap-10px">
-              <TextField name="phoneNumber" type="number" onChange={e => handleChange(e)} label="Phone Number" value={formData.phoneNumber} fullWidth variant="outlined" placeholder="Enter Phone No" autoFocus
+                <Grid item xs={9} lg={9} className="d-flex justify-content-center align-items-start flex-direction-column">
+                <label>Phone Number</label>
+              <TextField name="phoneNumber" type="number" onChange={e => handleChange(e)} label="" value={formData.phoneNumber} fullWidth variant="outlined" placeholder="Enter Phone No" autoFocus
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -215,6 +216,10 @@ function ExistingPatient() {
       
     </div>
 
+      <video autoplay muted loop id="myVideo">
+            <source src={videoFile} type="video/mp4"/>
+          </video>
+     </div>
   )
 }
 

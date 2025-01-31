@@ -3,7 +3,7 @@ import { Box, Typography, Grid, Card, CardContent, Button } from "@mui/material"
 import { PersonAdd, Person, ArrowBack } from "@mui/icons-material";
 import { useNavigate } from 'react-router-dom';
 import imgUrl from "../img/imgurl";
-import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
+import videoFile  from '../img/videobg.mp4'
 
 export default function Patient() {
 
@@ -11,7 +11,8 @@ export default function Patient() {
   return (
 
     <>
-      <div className="patientbg patientMainSection patientPage">
+    <div className='position-relative'>
+      <div className="patientbg patientMainSection patientPage mainPatientLanding">
       <Grid container spacing={0} className="patientHeaderSection">
         <Grid items xs={1}>
         <div
@@ -33,7 +34,7 @@ export default function Patient() {
       </Grid>
         <Box p={4} className="patientSection">
           <Typography variant="h4" mb={4} textAlign="center" className="mainHeading mb-0">
-        Welcome to CDIC!
+        Welcome to CDIC
       </Typography>
       <p className="subHeading">Choose your patient type</p>
           <Grid container spacing={2} justifyContent="center" className="mt-10px">
@@ -44,12 +45,14 @@ export default function Patient() {
                 <CardContent>
                   <Box display="flex" flexDirection="column" alignItems="center" gap={1}>
                     {/* <PersonAdd fontSize="large" color="primary" /> */}
-                    <img src={imgUrl.patientnews} className="patientImg"></img>
                     <div>
                     <Typography variant="h6" fontWeight="bold">
-                      New Patient
-                      <ArrowForwardIosOutlinedIcon/>
+                      New <br></br> Patient
+                      {/* <ArrowForwardIosOutlinedIcon/> */}
                     </Typography>
+                    </div>
+                    <div className="patientSecondDiv">
+                    <img src={imgUrl.patientnews} className="patientImg"></img>
                     </div>
                   </Box>
                 </CardContent>
@@ -62,13 +65,15 @@ export default function Patient() {
                 <CardContent>
                   <Box display="flex" flexDirection="column" alignItems="center" gap={1}>
                     {/* <Person fontSize="large" color="primary" /> */}
-                    <img src={imgUrl.existingpatient} className="patientImg"></img>
                     <div>
                     <Typography variant="h6" fontWeight="bold">
                     
-                      Existing Patient
-                      <ArrowForwardIosOutlinedIcon/>
+                      Existing <br></br> Patient
+                      {/* <ArrowForwardIosOutlinedIcon/> */}
                     </Typography>
+                    </div>
+                    <div className="patientSecondDiv">
+                    <img src={imgUrl.existingpatient} className="patientImg"></img>
                     </div>
                   </Box>
                 </CardContent>
@@ -82,6 +87,12 @@ export default function Patient() {
     \
         </div>
       </div>
+ <video autoplay muted loop id="myVideo">
+        <source src={videoFile} type="video/mp4"/>
+      </video>
+
+    </div>
+      
     </>
   );
 }
