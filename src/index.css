@@ -416,6 +416,8 @@ body {
   color: var(--var-nova-color);
 }
 
+
+
 .voiceFixIcon{
   position: fixed;
     z-index: 9;
@@ -529,6 +531,28 @@ body {
 
 .light-user-oddList{
   background-color: var(--var-lightBluish-variation-color);
+}
+
+.voiceChatDialog {
+  position: fixed;
+    z-index: 99;
+    bottom: 16px;
+    display: flex
+;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.voiceChatListen {
+  z-index: 99;
+  position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: calc(100dvh - 150px);
+
 }
 
 @media (min-width:1200px){

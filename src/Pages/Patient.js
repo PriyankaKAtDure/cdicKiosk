@@ -184,6 +184,12 @@ export default function Patient() {
               </Typography>
             </Toolbar>
           </AppBar>
+          <div className="voiceChatListen">
+            <p>Let's Speak!</p>
+          </div>
+          <div className="voiceChatDialog">
+            <img src={imgUrl.voiceIcon}></img>
+          </div>
           <video muted loop id="myVideo" autoPlay style={{zIndex:1}}>
             <source src={videoFile} type="video/mp4"/>
           </video>
