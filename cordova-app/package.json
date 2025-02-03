@@ -1,5 +1,5 @@
 {
-  "name": "io.cordova.hellocordova",
+  "name": "io.cordova.cdickiosk",
   "displayName": "HelloCordova",
   "version": "1.0.0",
   "description": "A sample Apache Cordova application that responds to the deviceready event.",
@@ -20,8 +20,8 @@
   },
   "cordova": {
     "platforms": [
-      "android",
-      "ios"
+      "ios",
+      "android"
     ],
     "plugins": {
       "cordova-plugin-tts": {},

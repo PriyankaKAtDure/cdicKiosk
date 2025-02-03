@@ -1,17 +1,19 @@
 {
   "files": {
-    "main.css": "./static/css/main.34bedd4a.css",
-    "main.js": "./static/js/main.245ae563.js",
-    "static/media/new-patient.png": "./static/media/new-patient.fb3229e999437e31a0b4.png",
-    "static/media/logo.png": "./static/media/logo.bdbf34ee648001dda554.png",
-    "static/media/langpage.jpg": "./static/media/langpage.24f7fbf38c8f0fbe23cf.jpg",
-    "static/media/existing-patient.png": "./static/media/existing-patient.ee29ae67b3212f945227.png",
+    "main.css": "./static/css/main.a9b65288.css",
+    "main.js": "./static/js/main.3e7bf139.js",
+    "static/media/voiceIcon.gif": "./static/media/voiceIcon.90d9bab143c8cad10018.gif",
+    "static/media/videobg.mp4": "./static/media/videobg.1945fa164dabd781ad32.mp4",
+    "static/media/cdiclogo.png": "./static/media/cdiclogo.bdbf34ee648001dda554.png",
+    "static/media/startButton.png": "./static/media/startButton.823aae6d91ee13d2d555.png",
+    "static/media/userIcon.png": "./static/media/userIcon.3add496fc6eacf07c4c0.png",
+    "static/media/existing-patient.png": "./static/media/existing-patient.42563bb9eecde3b5fb68.png",
     "index.html": "./index.html",
-    "main.34bedd4a.css.map": "./static/css/main.34bedd4a.css.map",
-    "main.245ae563.js.map": "./static/js/main.245ae563.js.map"
+    "main.a9b65288.css.map": "./static/css/main.a9b65288.css.map",
+    "main.3e7bf139.js.map": "./static/js/main.3e7bf139.js.map"
   },
   "entrypoints": [
-    "static/css/main.34bedd4a.css",
-    "static/js/main.245ae563.js"
+    "static/css/main.a9b65288.css",
+    "static/js/main.3e7bf139.js"
   ]
 }

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import imgUrl from "../img/imgurl";
 import videoFile from '../img/videobg.mp4'
 import CloseIcon from '@mui/icons-material/Close';
+import { toast, ToastContainer } from "react-toastify";
 
 export default function Patient() {
 
@@ -12,44 +13,156 @@ export default function Patient() {
     return <Slide direction="up" ref={ref} {...props} />;
   });
   // Code for Text-to-Speack
+
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  const [isListening, setIsListening] = useState(false);
+  const [questionIndex, setQuestionIndex] = useState(0);
+  const [responses, setResponses] = useState([]);
+
+  const [formData, setFormData] = useState({
+    firstname: "",
+    lastName: "Bot User",
+    age: "",
+    gender: "",
+    phoneNumber: "",
+  });
+
+
+  const existingQuestions = [
+    "What is your name?",
+    "What is your gender? Male , Female , Other",
+    "What is your Age?",
+    "What is your Phonenumber?"
+  ];
+
   const [text, setText] = useState("Hello, Please select your patient type , New or Exisiting");
   const [isReady, setIsReady] = useState(false);
 
-  const speakText = () => {
-    console.log("InsideFunction")
+  const voiceTTS = (text,action) => {
     if (window.TTS) {
       window.TTS.speak(
         {
           text: text,
           locale: "en-US",
-          rate: 1.0,
+          rate: 1,
         },
         () => {
           console.log("Speech successful")
-          startListening();
+          if(action == 'close'){
+            handleClose()
+          }
         },
-        (error) => console.error("Speech failed:", error)
+        (error) => {
+          setIsSpeaking(false);
+          console.error("Speech failed:", error)
+        }
       );
     } else {
       alert("TTS plugin is not available! Make sure you're running this on a real device.");
     }
   };
 
+  const startTTS = (text, questionIdx) => {
+    console.log(text, "InsideFunction")
+    if (window.TTS) {
+      window.TTS.speak(
+        {
+          text: text,
+          locale: "en-US",
+          rate: 1,
+        },
+        () => {
+          console.log("Speech successful")
+          setIsSpeaking(false);
+          if (questionIdx != null)
+            startListening(questionIdx);
+          else {
+            registerVoiceFlow()
+          }
+        },
+        (error) => {
+          setIsSpeaking(false);
+          console.error("Speech failed:", error)
+        }
+      );
+    } else {
+      alert("TTS plugin is not available! Make sure you're running this on a real device.");
+    }
+  };
+
+  const registerVoiceFlow = async () => {
+      try {
+        console.log("Form Data:", formData);
+        let inputJson = { ...formData, timeIn: "1" };
+        console.log("Form Data:", inputJson);
+        const response = await fetch(
+          "https://cdicuat.imonitorplus.com/service/api/filter/createBotRegistration",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Basic " + btoa("botUser1:Dure@2025"),
+            },
+            body: JSON.stringify(inputJson),
+          }
+        );
+        if (response.ok) {
+          const result = await response.json();
+          console.log("Success:", result);
+          toast.success(
+            `🎉 Congratulations! You have been registered successfully with UIC: ${result.uic}`,
+            {
+              position: "top-center",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              theme: "light",
+            }
+          );
+          setTimeout(() => {
+            // handleClose()
+            voiceTTS("Thank you for your response,you're registered successfully, the voice flow is closing","close")
+          }, 3000);
+        } else {
+          toast.error("Error submitting form. Please try again.", {
+            position: "top-center",
+          });
+          console.error("Error submitting form");
+        }
+      } catch (error) {
+        toast.error("An unexpected error occurred.", {
+          position: "top-center",
+        });
+        console.error("Error:", error);
+      }
+    };
 
   const [recognizedText, setRecognizedText] = useState([]);
 
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
+    setResponses([])
+    setQuestionIndex(0)
     setOpen(true);
   };
 
   const handleClose = () => {
+    setFormData({
+      firstname: "",
+      lastName: "Bot User",
+      age: "",
+      gender: "",
+      phoneNumber: "",
+    })
+    setResponses([])
     setOpen(false);
   };
 
 
-  const startListening = () => {
+  const startListening = (questionIdx) => {
     if (window.cordova) {
       window.plugins.speechRecognition.requestPermission(
         () => {
@@ -60,11 +173,47 @@ export default function Patient() {
           speechRecognizer.interimResults = false;
           speechRecognizer.lang = "en-US";
 
-          speechRecognizer.onstart = () => console.log("🎤 Listening...");
+          let receivedResponse = false;
+
+          // setTimeout(() => {
+          //   if (!receivedResponse) {
+          //     console.log("🕒 No response detected, asking again...");
+          //     startTTS(existingQuestions[questionIndex]); // Repeat the question
+          //   }
+          // }, 10000);
+
+          // speechRecognizer.onstart = () => console.log("🎤 Listening...");
+          speechRecognizer.onstart = () => {
+            console.log("🎤 Listening...");
+
+            // Set a timeout for 5 seconds to check if no response is received
+            setTimeout(() => {
+              if (!receivedResponse) {
+                console.log("🕒 No response detected, asking again...");
+                validateNoResponse(questionIdx)
+                // startTTS(existingQuestions[questionIdx],questionIdx); // Repeat the question
+                // setTimeout(() => startListening(questionIdx), 2000); // Restart listening after 2 seconds
+              }
+            }, 10000); // 5-second timeout
+          };
           speechRecognizer.onresult = (event) => {
             const speechResult = event.results[0][0].transcript;
             console.log("📝 Recognized text:", speechResult);
-            setRecognizedText((prev) => [...prev, speechResult]);
+            ValidateInput(speechResult, questionIdx)
+            // setRecognizedText((prev) => [...prev, speechResult] );
+            receivedResponse = true;
+            // setResponses((prev) => [...prev, speechResult]);
+            setIsListening(false);
+
+            // if (questionIndex < existingQuestions.length - 1) {
+            //   setTimeout(() => {
+            //     setQuestionIndex((prevIndex) => prevIndex + 1);
+            //     startTTS(existingQuestions[questionIndex + 1]); // Move to next question
+            //     console.log(questionIndex,"questionIndex")
+            //   }, 1000);
+            // } else {
+            //   console.log("✅ All questions answered:", responses);
+            // }
           };
 
           speechRecognizer.onerror = (event) => {
@@ -78,14 +227,117 @@ export default function Patient() {
     }
   };
 
+  const validateNoResponse = (questionIdx) => {
+    switch (questionIdx) {
+      case 0:
+        if (formData["firstname"] == "")
+          startTTS("No response recorded, Please enter your name", questionIdx)
+        break;
+      case 1:
+        if (formData["gender"] == "")
+          startTTS("No response recorded, Please select your gender, Male , Female , Other", questionIdx)
+        break;
+      case 2:
+        if (formData["age"] == "")
+          startTTS("No response recorded, Please enter Age", questionIdx)
+        break;
+      case 3:
+        if (formData["phoneNumber"] == "")
+          startTTS("No response recorded, Please enter Phonenumber along with the code", questionIdx)
+        break;
+      default:
+        break;
+    }
+  }
+  const ValidateInput = (response, questionIdx) => {
+    let tempholder = formData
+    let test = ""
+    test = response;
+    if(test.toLowerCase().includes("exit")){
+      voiceTTS("Thank you for your response, the voice flow is closing","close")
+      return
+    }
+    if (questionIdx == 0) {
+      if (response) {
+        console.log(response, "response for first question")
+        tempholder["firstname"] = response
+        setFormData(tempholder)
+        // setFormData((prevData) => ({ ...prevData, ["firstname"]: response }));
+        setResponses((prev) => [...prev, response]);
+        startTTS("What is your gender? Male , Female , Other", 1)
+      }
+    }
+    if (questionIdx == 1) {
+      console.log(response, "response for second question")
+      if (test.toLowerCase().includes("male"))
+        tempholder['gender'] = "1";
+        // setFormData((prevData) => ({ ...prevData, ["gender"]: "1", }));
+      else if (test.toLowerCase().includes("female"))
+        tempholder['gender'] = "2";
+        // setFormData((prevData) => ({ ...prevData, ["gender"]: "2", }));
+      else if (test.toLowerCase().includes("other"))
+        tempholder['gender'] = "3";
+        // setFormData((prevData) => ({ ...prevData, ["gender"]: "3", }));
+      else {
+        startTTS("Invalid option selected, please select from Male , Female or Other", 1)
+        return
+      }
+      setFormData(tempholder)
+      setResponses((prev) => [...prev, response]);
+      startTTS("What is your Age?", 2)
+    }
+    if (questionIdx == 2) {
+      console.log(response, "response for third question")
+      if (getNumberFromString(response))
+        tempholder['age'] = getNumberFromString(response)
+        // setFormData((prevData) => ({ ...prevData, ["age"]: getNumberFromString(response) }));
+      else {
+        startTTS("Invalid entry, Please enter your age", 2)
+        return
+      }
+      setFormData(tempholder)
+      setResponses((prev) => [...prev, response]);
+      startTTS("What is your Phonenumber?", 3)
+    }
+    if (questionIdx == 3) {
+      let number = sanitizeNumber(response)
+      if (getNumberLength(number) == 10) {
+        tempholder["phoneNumber"] = getNumberFromString(number)
+        // setFormData((prevData) => ({ ...prevData, ["phoneNumber"]: getNumberFromString(number) }));
+        setFormData(tempholder)
+        setResponses((prev) => [...prev, number]);
+        startTTS("Thank You, you will be registered with the provided details", null)
+      }
+      else if (getNumberLength(number) < 10)
+        startTTS("Invalid phone number, Please enter phone number", 3)
+      console.log(number, "response for fourth question")
+    }
+  }
+
+  const sanitizeNumber = (str) => {
+    return str.replace(/\D/g, ''); // Remove all non-digit characters
+  };
+
+  const getNumberFromString = (str) => {
+    const match = str.match(/\d+/); // Finds first number
+    return match ? Number(match[0]) : null;
+  };
+
+  const getNumberLength = (str) => {
+    const match = str.match(/\d+/); // Extract first number
+    return match ? match[0].length : 0;
+  };
+
   const navigate = useNavigate();
   return (
 
     <>
       <div className='position-relative'>
         <div className="patientbg patientMainSection patientPage mainPatientLanding">
+        <ToastContainer />
           <Grid container spacing={0} className="patientHeaderSection">
             <Grid items xs={1}>
+              
               <div
                 className="backButton">
                 <Button
@@ -154,7 +406,11 @@ export default function Patient() {
           </Box>
           <div className="voiceFixIcon">
             <img src={imgUrl.voiceAudioIcon} onClick={e => {
-              speakText()
+              voiceTTS("The voice flow is starting","null")
+              setTimeout(() => {
+                startTTS(existingQuestions[0], 0)
+              }, 2000);
+              // startTTS("Hello, Please select your patient type , New or Exisiting")
               handleClickOpen()
             }} className="" />
           </div>
@@ -171,27 +427,33 @@ export default function Patient() {
         >
           <AppBar sx={{ position: 'relative' }}>
             <Toolbar className='existingPatientList'>
-              <IconButton
-                edge="start"
-                color="inherit"
-                onClick={handleClose}
-                aria-label="close"
-              >
-                <CloseIcon />
-              </IconButton>
               <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
                 Voice Flow
               </Typography>
             </Toolbar>
           </AppBar>
           <div className="voiceChatListen">
-            <p>Let's Speak!</p>
+            <div>
+              <p>
+                Let's Start!
+              </p>
+              <p>
+                <ul>
+                  {responses.map((response, index) => (
+                    <li key={index}>
+                      <strong>Q:</strong> {existingQuestions[index]} <br />
+                      <strong>A:</strong> {response}
+                    </li>
+                  ))}
+                </ul>
+              </p>
+            </div>
           </div>
           <div className="voiceChatDialog">
             <img src={imgUrl.voiceIcon}></img>
           </div>
-          <video muted loop id="myVideo" autoPlay style={{zIndex:1}}>
-            <source src={videoFile} type="video/mp4"/>
+          <video muted loop id="myVideo" autoPlay style={{ zIndex: 1 }}>
+            <source src={videoFile} type="video/mp4" />
           </video>
 
         </Dialog>
