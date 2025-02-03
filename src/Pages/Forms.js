@@ -98,7 +98,7 @@ export default function Forms() {
     <div className="patientbg patientMainSection">
       <ToastContainer />
       <Grid container spacing={0} className="patientHeaderSection">
-        <Grid item xs={1}>
+        <Grid item xs={1} className="keyboard-none">
           <div
             className="backButton">
             <Button
@@ -109,7 +109,7 @@ export default function Forms() {
             </Button>
           </div>
         </Grid>
-        <Grid item xs={10}>
+        <Grid item xs={10} className="keyboard-none">
           <div className="patientLogo">
             <img src={imgUrl.cdiclogo} className="main-logo"></img>
           </div>
