@@ -451,6 +451,9 @@ export default function Patient() {
             </div>
           </div>
           <div className="voiceChatDialog">
+            <div className="d-flex justify-content-center align-items-center">
+            <img src={imgUrl.voiceLoaderGif} className="loaderVoice"></img>
+            </div>
             <img src={imgUrl.voiceIcon}></img>
           </div>
           <video muted loop id="myVideo" autoPlay style={{ zIndex: 1 }}>

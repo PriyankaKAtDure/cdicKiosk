@@ -541,7 +541,13 @@ body {
 ;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     width: 100%;
+}
+
+.voiceChatDialog img.loaderVoice{
+  width: 50%;
+  margin-bottom: 22px;
 }
 
 .voiceChatListen {
@@ -567,5 +573,6 @@ body {
 .voiceFixIcon,
 .voiceChatDialog{
   position: static;
+  margin-bottom: 10px;
 }
 }

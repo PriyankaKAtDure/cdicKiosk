@@ -10,6 +10,7 @@ const imgUrl  ={
   'voiceAudioIcon': require('../img/voiceIcon.gif'),
   'startButtonIcon' : require('../img/startButton.png'),
   'userButtonIcon' : require('../img/userIcon.png'),
+  'voiceLoaderGif' : require('../img/Loading.gif'),
 }
 
 export default imgUrl;
