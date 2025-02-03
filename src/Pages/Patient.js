@@ -94,6 +94,7 @@ export default function Patient() {
       try {
         console.log("Form Data:", formData);
         let inputJson = { ...formData, timeIn: "1" };
+        inputJson["phoneNumber"] = "91" + formData["phoneNumber"]
         console.log("Form Data:", inputJson);
         const response = await fetch(
           "https://cdicuat.imonitorplus.com/service/api/filter/createBotRegistration",
@@ -243,7 +244,7 @@ export default function Patient() {
         break;
       case 3:
         if (formData["phoneNumber"] == "")
-          startTTS("No response recorded, Please enter Phonenumber along with the code", questionIdx)
+          startTTS("No response recorded, Please enter Phonenumber", questionIdx)
         break;
       default:
         break;
