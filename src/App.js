@@ -5,8 +5,10 @@ import Patient from './Pages/Patient';
 import Forms from './Pages/Forms';
 import ExistingPatient from './Pages/ExistingPatient';
 import Search from './Pages/Search';
+import useKeyboardDetection from './Pages/useKeyboardVisible';
 
 function App() {
+  useKeyboardDetection();
   return (
     <Router>
       <Routes>

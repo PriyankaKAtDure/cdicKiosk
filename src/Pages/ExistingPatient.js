@@ -74,6 +74,7 @@ function ExistingPatient() {
             draggable: true,
             progress: undefined,
             theme: "light",
+            transition: "Slide",
             });
             setFormData({
               phoneCode:"",
