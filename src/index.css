@@ -90,6 +90,11 @@ body {
   display: flex;
 }
 
+.flex-column{
+  flex-direction: column;
+  align-items: center;
+}
+
 .justify-content-center {
   justify-content: center;
 }
@@ -537,15 +542,19 @@ body {
   position: fixed;
     z-index: 99;
     bottom: 16px;
-    display: flex
-;
+    display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row;
     width: 100%;
 }
 
 .voiceChatDialog img.loaderVoice{
+  width: 50%;
+  margin-bottom: 22px;
+}
+
+.voiceChatListen img.loaderVoice{
   width: 50%;
   margin-bottom: 22px;
 }
@@ -560,10 +569,10 @@ body {
     height: calc(100dvh - 150px);
 
 }
-/* 
-.keyboard-none {
+
+.keyboard-open .keyboard-none {
   display: none;
-} */
+}
 
 @media (min-width:1200px){
   body,
@@ -579,4 +588,72 @@ body {
   position: static;
   margin-bottom: 10px;
 }
+
+}
+
+/* Base class */
+.fade {
+  opacity: 0;
+  transform: scale(0.98); /* Slightly smaller for smooth effect */
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s;
+}
+
+/* Smooth Fade-in */
+@keyframes fadeInEffect {
+  0% {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.fade-in {
+  animation: fadeInEffect 0.4s ease-in-out;
+  opacity: 1;
+  transform: scale(1);
+  visibility: visible;
+}
+
+/* Smooth Fade-out */
+@keyframes fadeOutEffect {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+}
+
+.fade-out {
+  animation: fadeOutEffect 0.4s ease-in-out;
+  opacity: 0;
+  transform: scale(0.98);
+  visibility: hidden;
+}
+
+.Toastify__toast-container {
+  width: 100vw !important; /* Ensure full width */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 50% !important; /* Move toast to center vertically */
+  transform: translateY(-50%);
+  /* margin-left: 5% !important; */
+  /* margin-right: 25px !important; */
+}
+
+.Toastify__toast {
+
+  background: #000 !important;
+  color: white !important;
+  text-align: center;
+  padding: 16px;
+  border-radius: 8px;
+  font-size: 16px;
 }
