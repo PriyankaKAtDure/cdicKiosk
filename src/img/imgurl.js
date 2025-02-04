@@ -11,6 +11,8 @@ const imgUrl  ={
   'startButtonIcon' : require('../img/startButton.png'),
   'userButtonIcon' : require('../img/userIcon.png'),
   'voiceLoaderGif' : require('../img/Loading.gif'),
+
+  'cdicBg' : require('../img/videobg.png'),
 }
 
 export default imgUrl;
