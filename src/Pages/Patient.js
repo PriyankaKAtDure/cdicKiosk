@@ -38,7 +38,7 @@ export default function Patient() {
   const [text, setText] = useState("Hello, Please select your patient type , New or Exisiting");
   const [isReady, setIsReady] = useState(false);
 
-  const voiceTTS = (text,action) => {
+  const voiceTTS = (text, action) => {
     if (window.TTS) {
       window.TTS.speak(
         {
@@ -48,7 +48,7 @@ export default function Patient() {
         },
         () => {
           console.log("Speech successful")
-          if(action == 'close'){
+          if (action == 'close') {
             handleClose()
           }
         },
@@ -63,6 +63,8 @@ export default function Patient() {
   };
 
   const startTTS = (text, questionIdx) => {
+    setIsListening(false)
+    setIsSpeaking(true)
     console.log(text, "InsideFunction")
     if (window.TTS) {
       window.TTS.speak(
@@ -91,54 +93,55 @@ export default function Patient() {
   };
 
   const registerVoiceFlow = async () => {
-      try {
-        console.log("Form Data:", formData);
-        let inputJson = { ...formData, timeIn: "1" };
-        inputJson["phoneNumber"] = "91" + formData["phoneNumber"]
-        console.log("Form Data:", inputJson);
-        const response = await fetch(
-          "https://cdicuat.imonitorplus.com/service/api/filter/createBotRegistration",
+    try {
+      console.log("Form Data:", formData);
+      let inputJson = { ...formData, timeIn: "1" };
+      inputJson["phoneNumber"] = "91" + formData["phoneNumber"]
+      console.log("Form Data:", inputJson);
+      const response = await fetch(
+        "https://cdicuat.imonitorplus.com/service/api/filter/createBotRegistration",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Basic " + btoa("botUser1:Dure@2025"),
+          },
+          body: JSON.stringify(inputJson),
+        }
+      );
+      if (response.ok) {
+        const result = await response.json();
+        console.log("Success:", result);
+        toast.success(
+          `🎉 Congratulations! You have been registered successfully with UIC: ${result.uic}`,
           {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: "Basic " + btoa("botUser1:Dure@2025"),
-            },
-            body: JSON.stringify(inputJson),
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "light",
+            transition: "Slide"
           }
         );
-        if (response.ok) {
-          const result = await response.json();
-          console.log("Success:", result);
-          toast.success(
-            `🎉 Congratulations! You have been registered successfully with UIC: ${result.uic}`,
-            {
-              position: "top-center",
-              autoClose: 3000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              theme: "light",
-            }
-          );
-          setTimeout(() => {
-            // handleClose()
-            voiceTTS("Thank you for your response,you're registered successfully, the voice flow is closing","close")
-          }, 3000);
-        } else {
-          toast.error("Error submitting form. Please try again.", {
-            position: "top-center",
-          });
-          console.error("Error submitting form");
-        }
-      } catch (error) {
-        toast.error("An unexpected error occurred.", {
+        setTimeout(() => {
+          // handleClose()
+          voiceTTS("Thank you for your response,you're registered successfully, the voice flow is closing", "close")
+        }, 3000);
+      } else {
+        toast.error("Error submitting form. Please try again.", {
           position: "top-center",
         });
-        console.error("Error:", error);
+        console.error("Error submitting form");
       }
-    };
+    } catch (error) {
+      toast.error("An unexpected error occurred.", {
+        position: "top-center",
+      });
+      console.error("Error:", error);
+    }
+  };
 
   const [recognizedText, setRecognizedText] = useState([]);
 
@@ -163,8 +166,12 @@ export default function Patient() {
   };
 
 
+  const MAX_RETRIES = 3;
+  let retryCount = 0;
   const startListening = (questionIdx) => {
     if (window.cordova) {
+      setIsListening(true)
+      setIsSpeaking(false)
       window.plugins.speechRecognition.requestPermission(
         () => {
           const recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -188,14 +195,26 @@ export default function Patient() {
             console.log("🎤 Listening...");
 
             // Set a timeout for 5 seconds to check if no response is received
+            let timer = 5000
+            if (questionIdx == 3)
+              timer = 10000
+
             setTimeout(() => {
               if (!receivedResponse) {
                 console.log("🕒 No response detected, asking again...");
-                validateNoResponse(questionIdx)
-                // startTTS(existingQuestions[questionIdx],questionIdx); // Repeat the question
+                if (retryCount < MAX_RETRIES) {
+                  retryCount++; // Increment retry count
+                  console.log(`🕒 No response detected, retrying... (${retryCount}/${MAX_RETRIES})`);
+                    validateNoResponse(questionIdx);
+                } else {
+                    console.log("❌ Max retries reached. Moving on.");
+                    ValidateInput("exit", null)
+                    receivedResponse = true
+                    retryCount = 0; // Reset retry count for the next question
+                }
                 // setTimeout(() => startListening(questionIdx), 2000); // Restart listening after 2 seconds
               }
-            }, 10000); // 5-second timeout
+            }, timer); // 5-second timeout
           };
           speechRecognizer.onresult = (event) => {
             const speechResult = event.results[0][0].transcript;
@@ -203,6 +222,7 @@ export default function Patient() {
             ValidateInput(speechResult, questionIdx)
             // setRecognizedText((prev) => [...prev, speechResult] );
             receivedResponse = true;
+            retryCount = 0
             // setResponses((prev) => [...prev, speechResult]);
             setIsListening(false);
 
@@ -254,8 +274,8 @@ export default function Patient() {
     let tempholder = formData
     let test = ""
     test = response;
-    if(test.toLowerCase().includes("exit")){
-      voiceTTS("Thank you for your response, the voice flow is closing","close")
+    if (test.toLowerCase().includes("exit")) {
+      voiceTTS("Thank you for your response, the voice flow is closing", "close")
       return
     }
     if (questionIdx == 0) {
@@ -272,13 +292,13 @@ export default function Patient() {
       console.log(response, "response for second question")
       if (test.toLowerCase().includes("male"))
         tempholder['gender'] = "1";
-        // setFormData((prevData) => ({ ...prevData, ["gender"]: "1", }));
+      // setFormData((prevData) => ({ ...prevData, ["gender"]: "1", }));
       else if (test.toLowerCase().includes("female"))
         tempholder['gender'] = "2";
-        // setFormData((prevData) => ({ ...prevData, ["gender"]: "2", }));
+      // setFormData((prevData) => ({ ...prevData, ["gender"]: "2", }));
       else if (test.toLowerCase().includes("other"))
         tempholder['gender'] = "3";
-        // setFormData((prevData) => ({ ...prevData, ["gender"]: "3", }));
+      // setFormData((prevData) => ({ ...prevData, ["gender"]: "3", }));
       else {
         startTTS("Invalid option selected, please select from Male , Female or Other", 1)
         return
@@ -291,7 +311,7 @@ export default function Patient() {
       console.log(response, "response for third question")
       if (getNumberFromString(response))
         tempholder['age'] = getNumberFromString(response)
-        // setFormData((prevData) => ({ ...prevData, ["age"]: getNumberFromString(response) }));
+      // setFormData((prevData) => ({ ...prevData, ["age"]: getNumberFromString(response) }));
       else {
         startTTS("Invalid entry, Please enter your age", 2)
         return
@@ -335,10 +355,10 @@ export default function Patient() {
     <>
       <div className='position-relative'>
         <div className="patientbg patientMainSection patientPage mainPatientLanding">
-        <ToastContainer />
+          <ToastContainer />
           <Grid container spacing={0} className="patientHeaderSection">
             <Grid items xs={1}>
-              
+
               <div
                 className="backButton">
                 <Button
@@ -407,7 +427,7 @@ export default function Patient() {
           </Box>
           <div className="voiceFixIcon">
             <img src={imgUrl.voiceAudioIcon} onClick={e => {
-              voiceTTS("The voice flow is starting","null")
+              voiceTTS("The voice flow is starting", "null")
               setTimeout(() => {
                 startTTS(existingQuestions[0], 0)
               }, 2000);
@@ -434,7 +454,22 @@ export default function Patient() {
             </Toolbar>
           </AppBar>
           <div className="voiceChatListen">
-            <div>
+            {/* <button onClick={e => { setIsListening(!isListening); setIsSpeaking(!isSpeaking) }}>new</button> */}
+
+            <div className={`fade ${isListening ? "fade-in" : "fade-out"} d-flex justify-content-center align-items-center`}>
+              {isListening && <div className="d-flex flex-column justify-content-center">
+                <p>Start Speaking</p>
+                <img src={imgUrl.voiceLoaderGif} className="loaderVoice" alt="Listening..." />
+              </div>}
+            </div>
+
+            <div className={`fade ${isSpeaking ? "fade-in" : "fade-out"}`}>
+              {isSpeaking && <img src={imgUrl.voiceIcon} alt="Speaking..." />}
+            </div>
+
+
+
+            {/* <div>
               <p>
                 Let's Start!
               </p>
@@ -448,17 +483,13 @@ export default function Patient() {
                   ))}
                 </ul>
               </p>
-            </div>
+            </div> */}
           </div>
           <div className="voiceChatDialog">
-            <div className="d-flex justify-content-center align-items-center">
-            <img src={imgUrl.voiceLoaderGif} className="loaderVoice"></img>
-            </div>
-            <img src={imgUrl.voiceIcon}></img>
           </div>
-          {/* <video muted loop id="myVideo" autoPlay style={{ zIndex: 1 }}>
+          <video muted loop id="myVideo"  style={{ zIndex: 1 }} autoPlay>
             <source src={videoFile} type="video/mp4" />
-          </video> */}
+          </video>
 
         </Dialog>
       </div>
