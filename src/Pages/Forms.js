@@ -347,6 +347,11 @@ export default function Forms() {
           <Box mt={2}>
             <div class="content">
               <div class="card">
+              <div class="d-flex justify-content-end align-items-center">
+              <IconButton onClick={handleClose}>
+                      <CloseIcon />
+                    </IconButton>
+              </div>
                 <div class="firstinfo">
                   <QRCode
                     id="qr-gen"
@@ -358,9 +363,7 @@ export default function Forms() {
                   />
                   {/* <img src="https://bootdey.com/img/Content/avatar/avatar6.png" /> */}
                   <div class="profileinfo">
-                    <IconButton onClick={handleClose}>
-                      <CloseIcon />
-                    </IconButton>
+                    
                     <h3>{formData["firstname"]}</h3>
                     <h5>Gender: {formData["gender"]}</h5>
                     <h5>Age: {formData["age"]}</h5>
