@@ -205,12 +205,12 @@ export default function Patient() {
                 if (retryCount < MAX_RETRIES) {
                   retryCount++; // Increment retry count
                   console.log(`🕒 No response detected, retrying... (${retryCount}/${MAX_RETRIES})`);
-                    validateNoResponse(questionIdx);
+                  validateNoResponse(questionIdx);
                 } else {
-                    console.log("❌ Max retries reached. Moving on.");
-                    ValidateInput("exit", null)
-                    receivedResponse = true
-                    retryCount = 0; // Reset retry count for the next question
+                  console.log("❌ Max retries reached. Moving on.");
+                  ValidateInput("exit", null)
+                  receivedResponse = true
+                  retryCount = 0; // Reset retry count for the next question
                 }
                 // setTimeout(() => startListening(questionIdx), 2000); // Restart listening after 2 seconds
               }
@@ -349,6 +349,17 @@ export default function Patient() {
     return match ? match[0].length : 0;
   };
 
+  function generateQRCode(length) {
+    var result = "";
+    var characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return "dureProg_" + result;
+  }
+  
   const navigate = useNavigate();
   return (
 

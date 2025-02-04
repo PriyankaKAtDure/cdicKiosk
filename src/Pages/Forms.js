@@ -7,6 +7,7 @@ import {
   Button,
   MenuItem,
   InputAdornment,
+  Modal,
 } from "@mui/material";
 import imgUrl from "../img/imgurl";
 import { ArrowBack, ArrowBackOutlined } from "@mui/icons-material";
@@ -19,8 +20,39 @@ import FamilyRestroomOutlinedIcon from "@mui/icons-material/FamilyRestroomOutlin
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import videoFile from '../img/videobg.mp4';
+import CloseIcon from '@mui/icons-material/Close';
+import IconButton from '@mui/material/IconButton';
+import QRCode from "react-qr-code";
 
 export default function Forms() {
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  function generateQRCode(length) {
+    var result = "";
+    var characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return "dureProg_" + result;
+  }
+
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstname: "",
@@ -49,7 +81,10 @@ export default function Forms() {
       console.log("Form Data:", formData);
       let inputJson = { ...formData, timeIn: "1" };
       inputJson["phoneNumber"] = formData["phoneCode"] + formData["phoneNumber"]
+      inputJson["qrCode"] = generateQRCode(8);
       console.log("Form Data:", inputJson);
+      handleOpen()
+      return
       const response = await fetch(
         "https://cdicuat.imonitorplus.com/service/api/filter/createBotRegistration",
         {
@@ -293,9 +328,50 @@ export default function Forms() {
 
         </Box>
       </div>
-      <video muted loop id="myVideo" autoPlay>
-        <source src={videoFile} type="video/mp4" />
-      </video>
+      <Modal open={open} onClose={handleClose} aria-labelledby="modal-title">
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: 400,
+            // boxShadow: 24,
+            p: 3,
+            borderRadius: 2,
+          }}
+        >
+          {/* Modal Header */}
+
+          {/* Modal Content */}
+          <Box mt={2}>
+            <div class="content">
+              <div class="card">
+                <div class="firstinfo">
+                  <QRCode
+                    id="qr-gen"
+                    value={"dureProg_ggUeSw7r"}
+                    size={100}
+                    level={"H"}
+                    includeMargin={true}
+                  //onClick={enlargeImg}
+                  />
+                  {/* <img src="https://bootdey.com/img/Content/avatar/avatar6.png" /> */}
+                  <div class="profileinfo">
+                    <IconButton onClick={handleClose}>
+                      <CloseIcon />
+                    </IconButton>
+                    <h3>{formData["firstname"]}</h3>
+                    <h5>Gender: {formData["gender"]}</h5>
+                    <h5>Age: {formData["age"]}</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </Box>
+        </Box>
+      </Modal>
     </div>
   );
 }
