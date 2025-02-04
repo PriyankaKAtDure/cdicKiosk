@@ -40,7 +40,10 @@ export default function Forms() {
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false)
+    navigate("/patient");
+  };
 
   function generateQRCode(length) {
     var result = "";
@@ -83,8 +86,6 @@ export default function Forms() {
       inputJson["phoneNumber"] = formData["phoneCode"] + formData["phoneNumber"]
       inputJson["qrCode"] = generateQRCode(8);
       console.log("Form Data:", inputJson);
-      handleOpen()
-      return
       const response = await fetch(
         "https://cdicuat.imonitorplus.com/service/api/filter/createBotRegistration",
         {
@@ -99,22 +100,25 @@ export default function Forms() {
       if (response.ok) {
         const result = await response.json();
         console.log("Success:", result);
-        toast.success(
-          `🎉 Congratulations! You have been registered successfully with UIC: ${result.uic}`,
-          {
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            theme: "light",
-            transition: "Slide"
-          }
-        );
-        setTimeout(() => {
-          navigate("/patient");
-        }, 3000);
+        inputJson['uic'] = result.uic
+        setFormData(inputJson)
+        handleOpen()
+        // toast.success(
+        //   `🎉 Congratulations! You have been registered successfully with UIC: ${result.uic}`,
+        //   {
+        //     position: "top-center",
+        //     autoClose: 3000,
+        //     hideProgressBar: false,
+        //     closeOnClick: true,
+        //     pauseOnHover: true,
+        //     draggable: true,
+        //     theme: "light",
+        //     transition: "Slide"
+        //   }
+        // );
+        // setTimeout(() => {
+        //   navigate("/patient");
+        // }, 3000);
       } else {
         toast.error("Error submitting form. Please try again.", {
           position: "top-center",
@@ -347,11 +351,11 @@ export default function Forms() {
           <Box mt={2}>
             <div class="content">
               <div class="card">
-              <div class="d-flex justify-content-end align-items-center">
-              <IconButton onClick={handleClose}>
-                      <CloseIcon />
-                    </IconButton>
-              </div>
+                <div class="d-flex justify-content-end align-items-center">
+                  <IconButton onClick={handleClose}>
+                    <CloseIcon />
+                  </IconButton>
+                </div>
                 <div class="firstinfo">
                   <QRCode
                     id="qr-gen"
@@ -363,8 +367,9 @@ export default function Forms() {
                   />
                   {/* <img src="https://bootdey.com/img/Content/avatar/avatar6.png" /> */}
                   <div class="profileinfo">
-                    
+
                     <h3>{formData["firstname"]}</h3>
+                    <h5>UIC: {formData["uic"]}</h5>
                     <h5>Gender: {formData["gender"]}</h5>
                     <h5>Age: {formData["age"]}</h5>
                   </div>

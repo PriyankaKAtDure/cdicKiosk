@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Box, Typography, Grid, Card, CardContent, Button, Dialog, Slide, AppBar, Toolbar, IconButton } from "@mui/material";
+import { Box, Typography, Grid, Card, CardContent, Button, Dialog, Slide, AppBar, Toolbar, IconButton, Modal } from "@mui/material";
 import { PersonAdd, Person, ArrowBack } from "@mui/icons-material";
 import { useNavigate } from 'react-router-dom';
 import imgUrl from "../img/imgurl";
 import videoFile from '../img/videobg.mp4'
 import CloseIcon from '@mui/icons-material/Close';
 import { toast, ToastContainer } from "react-toastify";
+import QRCode from "react-qr-code";
 
 export default function Patient() {
 
@@ -18,6 +19,15 @@ export default function Patient() {
   const [isListening, setIsListening] = useState(false);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [responses, setResponses] = useState([]);
+
+  // Modal variable
+
+  const [openModal, setOpenModal] = useState(false);
+  const handleOpen = () => setOpenModal(true);
+  const handleCloseModal = () => {
+    setOpenModal(false)
+    handleClose()
+  };
 
   const [formData, setFormData] = useState({
     firstname: "",
@@ -97,6 +107,7 @@ export default function Patient() {
       console.log("Form Data:", formData);
       let inputJson = { ...formData, timeIn: "1" };
       inputJson["phoneNumber"] = "91" + formData["phoneNumber"]
+      inputJson["qrCode"] = generateQRCode(8);
       console.log("Form Data:", inputJson);
       const response = await fetch(
         "https://cdicuat.imonitorplus.com/service/api/filter/createBotRegistration",
@@ -112,23 +123,26 @@ export default function Patient() {
       if (response.ok) {
         const result = await response.json();
         console.log("Success:", result);
-        toast.success(
-          `🎉 Congratulations! You have been registered successfully with UIC: ${result.uic}`,
-          {
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            theme: "light",
-            transition: "Slide"
-          }
-        );
-        setTimeout(() => {
-          // handleClose()
-          voiceTTS("Thank you for your response,you're registered successfully, the voice flow is closing", "close")
-        }, 3000);
+        inputJson.uic = result.uic;
+        setFormData(inputJson)
+        handleOpen()
+        // toast.success(
+        //   `🎉 Congratulations! You have been registered successfully with UIC: ${result.uic}`,
+        //   {
+        //     position: "top-center",
+        //     autoClose: 3000,
+        //     hideProgressBar: false,
+        //     closeOnClick: true,
+        //     pauseOnHover: true,
+        //     draggable: true,
+        //     theme: "light",
+        //     transition: "Slide"
+        //   }
+        // );
+        // setTimeout(() => {
+        //   // handleClose()
+        //   voiceTTS("Thank you for your response,you're registered successfully, the voice flow is closing", "close")
+        // }, 3000);
       } else {
         toast.error("Error submitting form. Please try again.", {
           position: "top-center",
@@ -359,7 +373,7 @@ export default function Patient() {
     }
     return "dureProg_" + result;
   }
-  
+
   const navigate = useNavigate();
   return (
 
@@ -501,6 +515,55 @@ export default function Patient() {
           {/* <video muted loop id="myVideo"  style={{ zIndex: 1 }} autoPlay>
             <source src={videoFile} type="video/mp4" />
           </video> */}
+
+          <Modal open={openModal} onClose={handleCloseModal} aria-labelledby="modal-title">
+            <Box
+              sx={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                width: 400,
+                // boxShadow: 24,
+                p: 3,
+                borderRadius: 2,
+              }}
+            >
+              {/* Modal Header */}
+
+              {/* Modal Content */}
+              <Box mt={2}>
+                <div class="content">
+                  <div class="card">
+                    <div class="d-flex justify-content-end align-items-center">
+                      <IconButton onClick={handleCloseModal}>
+                        <CloseIcon />
+                      </IconButton>
+                    </div>
+                    <div class="firstinfo">
+                      <QRCode
+                        id="qr-gen"
+                        value={"dureProg_ggUeSw7r"}
+                        size={100}
+                        level={"H"}
+                        includeMargin={true}
+                      //onClick={enlargeImg}
+                      />
+                      {/* <img src="https://bootdey.com/img/Content/avatar/avatar6.png" /> */}
+                      <div class="profileinfo">
+
+                        <h3>{formData["firstname"]}</h3>
+                        <h5>UIC: {formData["uic"]}</h5>
+                        <h5>Gender: {formData["gender"]}</h5>
+                        <h5>Age: {formData["age"]}</h5>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </Box>
+            </Box>
+          </Modal>
 
         </Dialog>
       </div>
