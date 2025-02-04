@@ -217,9 +217,9 @@ function ExistingPatient() {
       
     </div>
 
-      <video muted loop id="myVideo" autoPlay>
+      {/* <video muted loop id="myVideo" autoPlay>
             <source src={videoFile} type="video/mp4"/>
-          </video>
+          </video> */}
      </div>
   )
 }
