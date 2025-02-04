@@ -118,7 +118,7 @@ export default function Forms() {
           <Grid item xs={1}></Grid>
         </Grid>
 
-        <Box p={4} className="patientSection">
+        <Box p={4} className="patientSection patientFormMainSection">
 
           <img src={imgUrl.userButtonIcon} className="userButtonIcon"></img>
           <Box mb={4} p={2} border="1px solid #e0e0e0" borderRadius={2} boxShadow={1} className="boxCard">

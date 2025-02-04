@@ -170,6 +170,15 @@ body {
     /* opacity: 0.9; */
 }
 
+.voice-dialog-box{
+  background-image: url(.././src/img/videobg.png);
+  background-position: center center;
+  background-size: cover;
+  height: 100vh;
+  overflow: hidden;
+  background-repeat: no-repeat;
+}
+
 
 .patientSection {
   display: flex;
@@ -183,6 +192,10 @@ body {
     margin-left: 20px;
     margin-right: 20px;
     padding-top: 65px !important;
+}
+
+.patientSection.patientFormMainSection{
+  width: 256px;
 }
 
 .leftDiv{
@@ -298,6 +311,7 @@ body {
   padding-left: 0px !important;
   padding-right: 0px !important;
   box-shadow: none !important;
+  width: 100%;
 }
 
 .boxCard label{
@@ -590,6 +604,13 @@ body {
   margin-bottom: 10px;
 }
 
+}
+
+@media (min-width:768px) and (max-width:1024px){
+  .patientFormMainSection{
+    width: 400px;
+    margin: 0 auto;
+  }
 }
 
 /* Base class */

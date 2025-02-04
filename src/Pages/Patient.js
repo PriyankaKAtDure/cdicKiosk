@@ -436,15 +436,15 @@ export default function Patient() {
             }} className="" />
           </div>
         </div>
-        <video muted loop id="myVideo" autoPlay>
+        {/* <video muted loop id="myVideo" autoPlay>
           <source src={videoFile} type="video/mp4" />
-        </video>
+        </video> */}
         <Dialog
           fullScreen
           open={open}
           onClose={handleClose}
           slots={Transition}
-          className='dialog-box'
+          className='dialog-box voice-dialog-box'
         >
           <AppBar sx={{ position: 'relative' }}>
             <Toolbar className='existingPatientList'>
@@ -487,9 +487,9 @@ export default function Patient() {
           </div>
           <div className="voiceChatDialog">
           </div>
-          <video muted loop id="myVideo"  style={{ zIndex: 1 }} autoPlay>
+          {/* <video muted loop id="myVideo"  style={{ zIndex: 1 }} autoPlay>
             <source src={videoFile} type="video/mp4" />
-          </video>
+          </video> */}
 
         </Dialog>
       </div>
