@@ -13,6 +13,7 @@ const imgUrl  ={
   'voiceLoaderGif' : require('../img/Loading.gif'),
 
   'cdicBg' : require('../img/videobg.png'),
+  'botIcon' : require ('../img/botIcon.png')
   
 }
 

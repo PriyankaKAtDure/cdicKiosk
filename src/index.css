@@ -447,6 +447,7 @@ body {
     display: flex;
     justify-content: end;
     align-items: end;
+    flex-direction: row;
 }
 
 .voiceFixIcon img{

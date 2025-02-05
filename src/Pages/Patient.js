@@ -451,6 +451,7 @@ export default function Patient() {
             </Grid>
           </Box>
           <div className="voiceFixIcon">
+            <img src={imgUrl.botIcon}></img>
             <img src={imgUrl.voiceAudioIcon} onClick={e => {
               voiceTTS("The voice flow is starting", "null")
               setTimeout(() => {
