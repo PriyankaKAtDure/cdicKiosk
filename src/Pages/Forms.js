@@ -334,6 +334,7 @@ export default function Forms() {
       </div>
       <Modal open={open} onClose={handleClose} aria-labelledby="modal-title">
         <Box
+        className="modalPatientStatus"
           sx={{
             position: "absolute",
             top: "50%",
