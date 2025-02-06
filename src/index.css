@@ -596,13 +596,35 @@ body {
     margin: 0 auto;
     max-width: 400px;
     border-left: 1px solid var(--color-white);
-    border-right: 1px solid var(--color-white);
+    border-right: 1px solid var(--color-white); 
 }
+
+body{
+    background-position: center center;
+    background-size: cover;
+    height: 100vh;
+    background-repeat: no-repeat;
+    display: flex;
+    background-image: url(.././src/img/voicelanding2.png);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 0px !important;
+}
+
+/* .patientbg,
+.voice-dialog-box {
+  background-image: none;
+} */
 
 .voiceFixIcon,
 .voiceChatDialog{
   position: static;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
+}
+
+.voiceFixIcon img{
+  width: 15% !important;
 }
 
 }
