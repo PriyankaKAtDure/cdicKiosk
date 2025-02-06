@@ -1024,3 +1024,43 @@ body{
   overflow: hidden;
  } 
 }
+
+@media (min-width: 1024px) and (max-width: 1025px) and (min-height: 1366px) {
+    .headingMainSection{
+      justify-content: center;
+      align-items: center;
+    }
+
+    .mobile-d-none {
+      display: none !important;
+  }
+
+  .patientSection .MuiTypography-root{
+    font-size: 38px !important;
+  }
+
+  .ipad-pro-section {
+    width: 70%;
+    display: flex
+;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+  }
+
+  .d-desktop-none{
+     display: block !important;
+  }
+
+  .mobile-form-section{
+    display: none !important;
+  }
+  .patientMainSection .patientLogo .main-logo {
+    width: 25% !important;
+}
+
+.patientFormMainSection.patientSection {
+  max-width: 600px !important;
+  width: 100%;
+}
+}
