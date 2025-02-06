@@ -102,12 +102,12 @@ function ExistingPatient() {
   });
   
   return (
-    <div className='position-relative'>
+    <div className='position-relative patientMainFormSection'>
     <div className="patientbg patientMainSection existingMainSection">
       {/* back logo div */}
       <ToastContainer />
       <Grid container spacing={0} className="patientHeaderSection">
-        <Grid item xs={1}>
+        <Grid item xs={1} md={1} lg={12}>
           <div
             className="backButton">
             <Button
@@ -118,15 +118,23 @@ function ExistingPatient() {
             </Button>
           </div>
         </Grid>
-        <Grid item xs={10}>
-          <div className="patientLogo">
+        <Grid item xs={10} md={10} lg={10}>
+          <div className="patientLogo d-desktop-none">
             <img src={imgUrl.cdiclogo} className="main-logo"></img>
           </div>
         </Grid>
         <Grid item xs={1}></Grid>
       </Grid>
-
-      <Box p={4} className="patientSection patientFormMainSection">
+   
+      <Grid container spacing={2} className="desktop-form-section">
+          <Grid item xs={0} lg={1}></Grid>
+          <Grid item xs={0} lg={5} className="pl-0px desktop-form-section mobile-form-section pt-0px">
+            <div className="patientLogo">
+                <img src={imgUrl.cdiclogo} className="main-logo"></img>
+              </div>
+          </Grid>
+           <Grid item xs={12} lg={5} className="desktop-form-section">
+           <Box p={4} className="patientSection patientFormMainSection">
       <img src={imgUrl.userButtonIcon} className="userButtonIcon"></img>
         <Box mb={4} p={2} border="1px solid #e0e0e0" borderRadius={2} boxShadow={1} className="boxCard">
 
@@ -214,6 +222,9 @@ function ExistingPatient() {
         </Box>
 
       </Box>
+           </Grid>
+           <Grid item xs={0} lg={1}></Grid>
+        </Grid>
       
     </div>
 

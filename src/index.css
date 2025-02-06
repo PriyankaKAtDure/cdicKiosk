@@ -75,6 +75,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
+  background-image: url(../src/img/voicelanding2.png);
+
 }
 
 .MuiTypography-root,
@@ -466,6 +468,7 @@ body {
   font-size: 16px;
     color: var(--var-nova-color);
     margin-top: 5px;
+    text-align: center;
 }
 
 .patientMainSection.patientPage .patientSection {
@@ -591,61 +594,7 @@ body {
   display: none;
 }
 
-@media (min-width:1200px){
-  body,
-  .dialog-box{
-    margin: 0 auto;
-    max-width: 400px;
-    border-left: 1px solid var(--color-white);
-    border-right: 1px solid var(--color-white); 
-}
 
-body{
-    background-position: center center;
-    background-size: cover;
-    height: 100vh;
-    background-repeat: no-repeat;
-    /* display: flex; */
-    background-image: url(.././src/img/voicelanding2.png);
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding-top: 0px !important;
-
-}
-
-/* .patientbg,
-.voice-dialog-box {
-  background-image: none;
-} */
-
-.voiceFixIcon,
-.voiceChatDialog{
-  position: static;
-  margin-bottom: 30px;
-}
-
-.voiceFixIcon img{
-  width: 15% !important;
-}
-
-.patientFormMainSection{  
-  height: 100% !important;
-}
-
-}
-
-@media (min-width:768px) and (max-width:1024px){
-  .patientFormMainSection{
-    width: 500px !important;
-    height: 100% !important;
-    margin: 0 auto;
-  }
-
-  .modalPatientStatus {
-    width: 450px !important;
-  }
-}
 
 /* Base class */
 .fade {
@@ -864,4 +813,214 @@ input div{
         top: -24px;
         left: -78px;
     }
+}
+
+
+/* responsive  */
+
+/* Apply styles for tablets and larger screens */
+@media (min-width: 768px) and (max-width:1023px) {
+
+  body{
+    background-position: center center;
+    background-size: cover;
+    height: 100vh;
+    background-repeat: no-repeat;
+    /* display: flex; */
+    background-image: url(.././src/img/videolanding.png);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 0px !important;
+
+}
+  .patientFormMainSection{
+    width: 500px !important;
+    /* height: 100% !important; */
+    height: calc(100vh - 270px);
+    margin: 0 auto;
+  }
+
+  .voiceFixIcon,
+.voiceChatDialog{
+  position: static;
+  margin-bottom: 30px;
+  margin-right: 11px;
+}
+.voiceFixIcon img {
+  width: 15%;
+}
+
+  .modalPatientStatus {
+    width: 450px !important;
+  }
+
+  .landingcdic, .patientbg{
+    background-image: none !important;
+  }
+
+
+  /* .patientMainSection .patientLogo .main-logo {
+    width: 25% !important;
+  } */
+
+
+  /* .patientSubSection{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  } */
+
+  .patientSection .MuiTypography-root.mainHeading {
+    font-size: 45px !important;
+  }
+
+  .mobile-form-section{
+    display: none !important;
+   }
+  
+
+}
+
+/* Apply styles for desktops and larger screens */
+@media (min-width: 1024px) {
+  .dialog-box{
+    margin: 0 auto;
+    /* max-width: 400px; */
+    border-left: 1px solid var(--color-white);
+    border-right: 1px solid var(--color-white); 
+}
+
+body{
+    background-position: center center;
+    background-size: cover;
+    height: 100vh;
+    background-repeat: no-repeat;
+    /* display: flex; */
+    background-image: url(.././src/img/videolanding.png);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 0px !important;
+
+}
+
+/* .patientbg,
+.voice-dialog-box {
+  background-image: none;
+} */
+
+/* .voiceFixIcon,
+.voiceChatDialog{
+  position: static;
+  margin-bottom: 30px;
+} */
+
+.voiceFixIcon img{
+  width: 8% !important;
+  cursor: pointer;
+}
+
+.patientFormMainSection{  
+  height: 100% !important;
+}
+
+.landingcdic, .patientbg{
+  background-image: none !important;
+}
+
+.patientMainSection .patientLogo .main-logo {
+  width: 25% !important;
+}
+
+.patientHeaderSection{
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+  margin-top: 0px !important;
+}
+
+.patientSubSection{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.patientSection .MuiTypography-root.mainHeading {
+  font-size: 45px !important;
+}
+
+.patientSection .subHeading {
+  font-size: 22px;
+  margin-top: 10px;
+  display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 7px;
+}
+
+.patientSection {
+  height: 100dvh;
+  margin-left: 0px !important;
+}
+
+.headingMainSection{
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  text-align: left;
+}
+
+.mobile-d-none{
+  display: block !important;
+}
+
+.mainPatientLanding.mainPatientLanding .patientSection{
+  padding-left: 0px !important;
+}
+
+.pl-0px{
+  padding-left: 0px !important;
+}
+
+.main-logo  {
+  width: 35% !important;
+}
+
+.d-desktop-none{
+  display: none !important;
+}
+
+.desktop-form-section{
+  height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.patientMainFormSection .patientLogo .main-logo{
+  width: 80% !important;
+}
+
+.patientFormMainSection.patientSection{
+  max-width: 420px !important;
+  width: 100%;
+}
+
+}
+
+.pt-0px{
+  padding-top: 0px !important;
+}
+
+@media(min-width:320px) and (max-width:767px){
+ .mobile-form-section{
+  display: none !important;
+ }
+
+ .patientSection.patientFormMainSection {
+  height: calc(100dvh - 170px);
+  overflow: hidden;
+ } 
 }
