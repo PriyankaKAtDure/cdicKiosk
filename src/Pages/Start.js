@@ -11,7 +11,9 @@ function Start() {
   return (
     <div className='position-relative'>
     <div className='startSection patientbg'>
+    <div className='d-flex justify-content-center align-items-center'>
       <img src={imgUrl.cdiclogo} className="main-logo"></img>
+      </div>
       <div className='start-button'>
 
       <img src={imgUrl.startButtonIcon} onClick={() => navigate("/patient")}></img>

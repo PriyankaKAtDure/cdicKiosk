@@ -27,6 +27,10 @@
   position: relative;
 }
 
+.d-none{
+  display: none !important;
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 8px;
@@ -153,15 +157,14 @@ body {
   border-color: var(--color-white);
 }
 
-.landingcdic,
-.patientbg{
+body{
   background-position: center center;
     background-size: cover;
     height: 100vh;
     /* background-image: url(.././src/img/langpage.png); */
     background-repeat: no-repeat;
     /* background-image:    linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(245, 246, 252, 0.52)),    url('.././src/img/langpage.jpg'); */
-    display: flex;
+    /* display: flex; */
     background-image: url(.././src/img/videolanding.png);
     justify-content: center;
     align-items: center;
@@ -190,8 +193,8 @@ body {
   background-color: var(--var-nova-color);
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
-    margin-left: 20px;
-    margin-right: 20px;
+    /* margin-left: 20px;
+    margin-right: 20px; */
     padding-top: 65px !important;
 }
 
@@ -389,7 +392,7 @@ body {
 }
 
 .patientMainSection .patientLogo .main-logo {
-  width: 40% !important;
+  width: 60% !important;
 
 }
 
@@ -463,9 +466,10 @@ body {
 }
 
 .patientSection .subHeading{
-  font-size: 16px;
+  font-size: 30px;
     color: var(--var-nova-color);
     margin-top: 5px;
+    text-align: center;
 }
 
 .patientMainSection.patientPage .patientSection {
@@ -473,8 +477,8 @@ body {
 }
 
 .patientHeaderSection{
-  margin-top: 56px;
-  margin-bottom: 56px;
+  /* margin-top: 56px;
+  margin-bottom: 56px; */
 }
 
 /* .patientbg .patientLogo .main-logo,
@@ -485,7 +489,8 @@ body {
 } */
 
 .patientSection .MuiTypography-root.mainHeading{
-  font-size: 26px;
+  font-size: 40px;
+    margin-bottom: 20px !important;
 }
 
 .backButton button{
@@ -528,12 +533,12 @@ body {
 
 .mainPatientLanding .patientSection{
   background-color: transparent !important;
-  padding-top: 32px !important;
+  padding-top: 0px !important;
 }
-.mainPatientLanding.mainPatientLanding .patientSection{
+/* .mainPatientLanding.mainPatientLanding .patientSection{
   padding-left: 16px;
   padding-right: 16px;
-}
+} */
 
 .mainPatientLanding .patientHeaderSection{
  margin-bottom: 0px !important;
@@ -592,7 +597,7 @@ body {
 }
 
 @media (min-width:1200px){
-  body,
+  /* body,
   .dialog-box{
     margin: 0 auto;
     max-width: 400px;
@@ -605,28 +610,26 @@ body{
     background-size: cover;
     height: 100vh;
     background-repeat: no-repeat;
-    /* display: flex; */
     background-image: url(.././src/img/voicelanding2.png);
     justify-content: center;
     align-items: center;
     flex-direction: column;
     padding-top: 0px !important;
 
-}
+} */
 
 /* .patientbg,
 .voice-dialog-box {
   background-image: none;
 } */
 
-.voiceFixIcon,
 .voiceChatDialog{
   position: static;
   margin-bottom: 30px;
 }
 
 .voiceFixIcon img{
-  width: 15% !important;
+  width: 7% !important;
 }
 
 .patientFormMainSection{  
@@ -864,4 +867,20 @@ input div{
         top: -24px;
         left: -78px;
     }
+}
+
+/* webapp UI */
+
+.pt-0px{
+  padding-top: 0px;
+}
+
+.main-logo{
+  width: 100% !important;
+}
+
+
+.patientMainSection.patientPage .patientSection{
+  height: calc(100dvh - 17px);
+  justify-content: center !important;
 }

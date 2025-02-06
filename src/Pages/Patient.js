@@ -382,7 +382,7 @@ export default function Patient() {
         <div className="patientbg patientMainSection patientPage mainPatientLanding">
           <ToastContainer />
           <Grid container spacing={0} className="patientHeaderSection">
-            <Grid items xs={1}>
+            <Grid items xs={12}>
 
               <div
                 className="backButton">
@@ -394,22 +394,29 @@ export default function Patient() {
                 </Button>
               </div>
             </Grid>
-            <Grid items xs={10}>
+            {/* <Grid items xs={10}>
+              <div className="patientLogo">
+                <img src={imgUrl.cdiclogo} className="main-logo"></img>
+              </div>
+            </Grid> */}
+            <Grid item xs={1}></Grid>
+          </Grid>
+          <Grid container spacing={2} className="patientSection">
+            <Grid item xs={5} className="pt-0px">
+              <Typography variant="h4" mb={4} textAlign="center" className="mainHeading mb-0">
+                Welcome to CDIC
+              </Typography>
+              
               <div className="patientLogo">
                 <img src={imgUrl.cdiclogo} className="main-logo"></img>
               </div>
             </Grid>
-            <Grid item xs={1}></Grid>
-          </Grid>
-          <Box p={4} className="patientSection">
-            <Typography variant="h4" mb={4} textAlign="center" className="mainHeading mb-0">
-              Welcome to CDIC
-            </Typography>
+            <Grid item xs={7} className="pt-0px">
             <p className="subHeading">Choose your patient type</p>
             <Grid container spacing={2} justifyContent="center" className="mt-10px">
               {/* New Patient Card */}
-
-              <Grid item xs={6} sm={6} md={6} onClick={() => navigate("/forms")} className="cursor-pointer">
+              <Grid item xs={2}></Grid>
+              <Grid item xs={4} sm={4} md={4} onClick={() => navigate("/forms")} className="cursor-pointer">
                 <Card sx={{ bgcolor: "#f8fbff", borderRadius: 2, boxShadow: 2 }}>
                   <CardContent>
                     <Box display="flex" flexDirection="column" alignItems="center" gap={1}>
@@ -429,7 +436,7 @@ export default function Patient() {
               </Grid>
 
               {/* Existing Patient Card */}
-              <Grid item xs={6} sm={6} md={6} onClick={() => navigate("/existingpatient")} className="cursor-pointer">
+              <Grid item xs={4} sm={4} md={4} onClick={() => navigate("/existingpatient")} className="cursor-pointer">
                 <Card sx={{ border: "1px solid #e0e0e0", borderRadius: 2, boxShadow: 2 }}>
                   <CardContent>
                     <Box display="flex" flexDirection="column" alignItems="center" gap={1}>
@@ -448,8 +455,60 @@ export default function Patient() {
                   </CardContent>
                 </Card>
               </Grid>
+              <Grid item xs={2}></Grid>
             </Grid>
-          </Box>
+            </Grid>
+          </Grid>
+          {/* <Box p={4} className="patientSection d-none">
+            <Typography variant="h4" mb={4} textAlign="center" className="mainHeading mb-0">
+              Welcome to CDIC
+            </Typography>
+            <p className="subHeading">Choose your patient type</p>
+            <Grid container spacing={2} justifyContent="center" className="mt-10px">
+             
+              <Grid item xs={2}></Grid>
+              <Grid item xs={4} sm={4} md={4} onClick={() => navigate("/forms")} className="cursor-pointer">
+                <Card sx={{ bgcolor: "#f8fbff", borderRadius: 2, boxShadow: 2 }}>
+                  <CardContent>
+                    <Box display="flex" flexDirection="column" alignItems="center" gap={1}>
+                     
+                      <div>
+                        <Typography variant="h6" fontWeight="bold">
+                          New <br></br> Patient
+                          
+                        </Typography>
+                      </div>
+                      <div className="patientSecondDiv">
+                        <img src={imgUrl.patientnews} className="patientImg"></img>
+                      </div>
+                    </Box>
+                  </CardContent>
+                </Card>
+              </Grid>
+
+           
+              <Grid item xs={4} sm={4} md={4} onClick={() => navigate("/existingpatient")} className="cursor-pointer">
+                <Card sx={{ border: "1px solid #e0e0e0", borderRadius: 2, boxShadow: 2 }}>
+                  <CardContent>
+                    <Box display="flex" flexDirection="column" alignItems="center" gap={1}>
+                     
+                      <div>
+                        <Typography variant="h6" fontWeight="bold">
+
+                          Existing <br></br> Patient
+                       
+                        </Typography>
+                      </div>
+                      <div className="patientSecondDiv">
+                        <img src={imgUrl.existingpatient} className="patientImg"></img>
+                      </div>
+                    </Box>
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item xs={2}></Grid>
+            </Grid>
+          </Box> */}
           <div className="voiceFixIcon">
             <img src={imgUrl.botIcon}></img>
             <img src={imgUrl.voiceAudioIcon} onClick={e => {
