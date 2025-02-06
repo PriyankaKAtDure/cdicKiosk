@@ -371,7 +371,7 @@ export default function Forms() {
 
                     <h3>{formData["firstname"]}</h3>
                     <h5>UIC: {formData["uic"]}</h5>
-                    <h5>Gender: {formData["gender"]}</h5>
+                    <h5>Gender: {formData["gender"] == "1" ? "Male" : (formData["gender"] == "2" ? "Female": "Others" )}</h5>
                     <h5>Age: {formData["age"]}</h5>
                   </div>
                 </div>
