@@ -381,6 +381,7 @@ export default function Patient() {
       <div className='position-relative'>
         <div className="patientbg patientMainSection patientPage mainPatientLanding">
           <ToastContainer />
+          
           <Grid container spacing={0} className="patientHeaderSection">
             <Grid items xs={1}>
 
@@ -461,6 +462,7 @@ export default function Patient() {
             
             
           </Box>
+         
           <div className="voiceFixIcon">
             <img src={imgUrl.botIcon}></img>
             <img src={imgUrl.voiceAudioIcon} onClick={e => {

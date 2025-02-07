@@ -960,8 +960,21 @@ body{
 }
 
 .patientSection {
-  height: 100dvh;
-  margin-left: 0px !important;
+  height: calc(100dvh - 210px);
+        margin-left: 0px !important;
+        width: 70%;
+        /* margin: 0 auto; */
+        align-items: center;
+        justify-content: center !important;
+        
+}
+
+.mainPatientLanding .patientSection{
+  padding-top: 16px !important;
+}
+
+.backButton{
+  margin-left: 30px;
 }
 
 .headingMainSection{
@@ -1006,6 +1019,19 @@ body{
 .patientFormMainSection.patientSection{
   max-width: 420px !important;
   width: 100%;
+}
+
+.patientTypeSection{
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: calc(100vh - 200px);
+}
+
+.start-button img {
+  max-width: 320px;
 }
 
 }
@@ -1062,5 +1088,27 @@ body{
 .patientFormMainSection.patientSection {
   max-width: 600px !important;
   width: 100%;
+}
+}
+
+@media (min-width:1920px){
+  .patientSection .MuiTypography-root.mainHeading {
+    font-size: 65px !important;
+  }
+
+
+  .patientSection .subHeading {
+    font-size: 30px;
+
+  }
+  
+  .patientSection .MuiTypography-root {
+    font-size: 32px;
+
+  }  
+
+  .patientFormMainSection.patientSection {
+    max-width: 550px !important;
+  
 }
 }
