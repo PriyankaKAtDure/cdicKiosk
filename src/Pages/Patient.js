@@ -505,7 +505,7 @@ export default function Patient() {
         >
           <AppBar sx={{ position: 'relative' }}>
             <Toolbar className='existingPatientList'>
-              <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+              <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div" className="text-center">
                 Voice Flow
               </Typography>
             </Toolbar>

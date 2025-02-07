@@ -143,14 +143,7 @@ function ExistingPatient() {
               <Grid item xs={3}>
               <label>Code</label>
               <TextField name="phoneCode" type="number" onChange={e => handleChange(e)} value={formData.phoneCode} label="" fullWidth variant="outlined" placeholder="Code" autoFocus
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      {/* <LockIcon /> */}
-                      {/* <ContactPhoneOutlinedIcon /> */}
-                    </InputAdornment>
-                  ),
-                }} />
+                 />
               </Grid>
                 <Grid item xs={9} lg={9} className="d-flex justify-content-center align-items-start flex-direction-column">
                 <label>Phone Number</label>

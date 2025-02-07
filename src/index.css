@@ -1111,4 +1111,12 @@ body{
     max-width: 550px !important;
   
 }
+.voiceFixIcon img {
+  width: 14% !important;
+  cursor: pointer;
+}
+}
+
+.text-center {
+  text-align: center;
 }
