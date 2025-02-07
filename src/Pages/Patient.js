@@ -374,6 +374,24 @@ export default function Patient() {
     return "dureProg_" + result;
   }
 
+    // In app browser flow
+    const [browserRef, setBrowserRef] = useState(null);
+    const openInAppBrowser = () => {
+      if (window.cordova && window.cordova.InAppBrowser) {
+        const ref = window.cordova.InAppBrowser.open("https://vitalai.imonitorplus.com/t1dpatient?botid=481", "_blank", "location=yes,zoom=yes");
+        setBrowserRef(ref);      
+      } else {
+        const newTab = window.open("https://vitalai.imonitorplus.com/t1dpatient?botid=481", "_blank");
+        setBrowserRef(newTab);
+      }
+    };
+    const closeInAppBrowser = () => {
+      if (browserRef) {
+        browserRef.close(); // Closes the InAppBrowser window
+        setBrowserRef(null);
+      }
+    };
+
   const navigate = useNavigate();
   return (
 
@@ -464,7 +482,7 @@ export default function Patient() {
           </Box>
          
           <div className="voiceFixIcon">
-            <img src={imgUrl.botIcon}></img>
+          <img onClick={e => openInAppBrowser()} src={imgUrl.botIcon}></img>
             <img src={imgUrl.voiceAudioIcon} onClick={e => {
               voiceTTS("The voice flow is starting", "null")
               setTimeout(() => {
@@ -568,7 +586,7 @@ export default function Patient() {
 
                         <h3>{formData["firstname"]}</h3>
                         <h5>UIC: {formData["uic"]}</h5>
-                        <h5>Gender: {formData["gender"]}</h5>
+                        <h5>Gender: {formData["gender"] == "1" ? "Male" : (formData["gender"] == "2" ? "Female": "Others" )}</h5>
                         <h5>Age: {formData["age"]}</h5>
                       </div>
                     </div>
