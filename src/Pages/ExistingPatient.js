@@ -393,10 +393,12 @@ const getPatientDetails = async(data) => {
                         <h5>Gender: {formDataQr["Gender"]}</h5>
                         <h5>Age: {formDataQr["Age"]}</h5>
                         <div className='d-flex justify-content-end align-items-center'>
+                          <span>
                           <img src={imgUrl.openProfile} className='cursor-pointer' onClick={e => {
                           localStorage.setItem("userData",JSON.stringify(formDataQr))
                           navigate("/search")
                         }}></img>
+                        </span>
                         </div>
                         </div>
                         </Grid>
