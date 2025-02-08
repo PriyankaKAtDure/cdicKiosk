@@ -1,14 +1,24 @@
-import React from "react";
-import { Box, Typography, Grid, Card, CardContent, Button } from "@mui/material";
+import React, { useState } from "react";
+import { Box, Typography, Grid, Card, CardContent, Button, Modal, IconButton } from "@mui/material";
 import { PersonAdd, ArrowBack } from "@mui/icons-material";
 import { useNavigate } from 'react-router-dom';
 import imgUrl from "../img/imgurl";
 import videoFile from '../img/videobg.mp4'
 import { Html5QrcodeScanner } from "html5-qrcode";
 import { toast, ToastContainer } from "react-toastify";
+import CloseIcon from '@mui/icons-material/Close';
+import { CardHeader, Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import _ from "underscore";
+import metadata from "./metdaData.json"
 
 export default function Search() {
-  console.log(localStorage.getItem("userData") ? JSON.parse(localStorage.getItem("userData")) : null)
+  console.log(metadata, localStorage.getItem("userData") ? JSON.parse(localStorage.getItem("userData")) : null)
+
+  const [formData, setFormData] = useState(localStorage.getItem("userData") ? JSON.parse(localStorage.getItem("userData")) : null);
+
+  const [eventData, setEventData] = useState({});
+
   const navigate = useNavigate();
 
   const openQrScanner = async () => {
@@ -106,8 +116,81 @@ export default function Search() {
         progress: undefined,
         theme: "light",
       });
-      
+
     }
+  }
+  const [openModal, setOpenModal] = React.useState(false);
+  const handleModalOpen = () => {
+    setOpenModal(true);
+  };
+
+  const handleModalClose = () => {
+    setOpenModal(false);
+  };
+
+  const getStageDetails = async () => {
+    // https://cdicuat.imonitorplus.com/service/api/trackedEntityInstances/UcU4nLV3cUp.json?program=eAHvg6zuxvK&fields=*?
+    const response = await fetch(
+      "https://cdicuat.imonitorplus.com/service/api/trackedEntityInstances/" + formData["Instance"] + ".json?program=eAHvg6zuxvK&fields=*?",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Basic " + btoa("botUser1:Dure@2025"),
+        },
+      }
+    )
+    if (response.ok) {
+      const result = await response.json();
+      console.log("Success:", result);
+      console.log(GroupEventstage(result.enrollments[0]?.events))
+      setEventData(GroupEventstage(result.enrollments[0]?.events))
+      handleModalOpen()
+    }
+  }
+  const GroupEventstage = (arrayData) => {
+    let GroupArrData, arrayDataSort;
+
+    if (arrayData && arrayData.length > 0) {
+      // Sorting by lastUpdated date
+      arrayDataSort = _.sortBy(arrayData, [function (o) { return o.lastUpdated; }]).reverse();
+
+      // Grouping by programStage
+      GroupArrData = arrayDataSort.reduce(function (r, a) {
+        r[a.programStage] = r[a.programStage] || [];
+        r[a.programStage].push(a);
+        return r;
+      }, Object.create(null));
+    } else {
+      GroupArrData = [];
+    }
+
+    return GroupArrData;
+  };
+  const renderStages = (stage,stageObject,index) => {
+    console.log( index,"stage")
+    return (
+      <Accordion defaultExpanded={index === 0} style={{overflow:"auto"}}>
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography variant="span">{stage.created}</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          {/* <Typography variant="h6" gutterBottom>Outcome</Typography> */}
+          <Grid container spacing={2}>
+            {
+              stage.dataValues.map(value => {
+                
+                return(
+                  <Grid item xs={12}>
+                    <Typography>{ _.find(stageObject.programStageDataElements, (item) => item.dataElement.id === value.dataElement).dataElement.displayName}:{value.value}</Typography>
+                  </Grid>
+                )
+              })
+            }
+          </Grid>
+        </AccordionDetails>
+      </Accordion>
+    )
   }
   return (
 
@@ -140,7 +223,7 @@ export default function Search() {
       </Typography> */}
             <Grid container spacing={4} justifyContent="center" className="">
               {/* New Patient Card */}
-               <Grid item xs={12} lg={3}></Grid>
+              <Grid item xs={12} lg={3}></Grid>
               <Grid item xs={6} sm={6} md={6} lg={3} onClick={() => { }} className="cursor-pointer">
                 <Card sx={{ bgcolor: "#f8fbff", borderRadius: 2, boxShadow: 2, marginBottom: 2 }}>
                   <CardContent>
@@ -152,7 +235,7 @@ export default function Search() {
                         </Typography>
                       </div>
                       <div className="patientSecondDiv">
-                        <img src={imgUrl.generateReport} className="patientImg"></img>
+                        <img onClick={e => getStageDetails()} src={imgUrl.generateReport} className="patientImg"></img>
                       </div>
 
                     </Box>
@@ -162,7 +245,7 @@ export default function Search() {
 
               <Grid item xs={6} sm={6} md={6} lg={3} onClick={() => { }} className="cursor-pointer">
 
-              <Card sx={{ bgcolor: "#f8fbff", borderRadius: 2, boxShadow: 2 }}>
+                <Card sx={{ bgcolor: "#f8fbff", borderRadius: 2, boxShadow: 2 }}>
                   <CardContent>
                     <Box display="flex" flexDirection="column" alignItems="center" gap={1}>
                       {/* <PersonAdd fontSize="large" color="primary" /> */}
@@ -179,8 +262,8 @@ export default function Search() {
                     </Box>
                   </CardContent>
                 </Card>
-                </Grid>
-                <Grid item xs={4} lg={3}></Grid>
+              </Grid>
+              <Grid item xs={4} lg={3}></Grid>
 
               {/* Existing Patient Card */}
               <Grid item xs={9} sm={9} md={9} onClick={() => navigate("/t")} className="cursor-pointer d-none patientSummaryBox">
@@ -198,6 +281,91 @@ export default function Search() {
               </Grid>
             </Grid>
           </Box>
+          <Modal open={openModal} onClose={handleModalClose} aria-labelledby="modal-title">
+            <Box
+              className="modalPatientStatus"
+              sx={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                // width: 400,
+                // boxShadow: 24,
+                // p: 3,
+                borderRadius: 2,
+              }}
+            >
+              {/* Modal Header */}
+
+              {/* Modal Content */}
+              <Box mt={2}>
+                <div class="content summarydiv">
+                  <div class="">
+                    {/* <div class="d-flex justify-content-end align-items-center">
+                      <IconButton onClick={handleModalClose}>
+                        <CloseIcon />
+                      </IconButton>
+                    </div> */}
+                    <div className="p-4 bg-gray-100 rounded-lg">
+                      {/* Header */}
+                      <div className="d-flex justify-content-space mb-4">
+                        <h3 className="p-0 text-xl font-semibold">PATIENT SUMMARY</h3>
+                        {/* <div className="space-x-2">
+                          <Button >Download Prescription</Button>
+                          <Button >Download Summary</Button>
+                        </div> */}
+                        <IconButton onClick={handleModalClose}>
+                          <CloseIcon />
+                        </IconButton>
+                      </div>
+
+                      {/* Patient Details */}
+                      <Grid container spacing={0} className=''>
+                        <Grid items xs={4}>
+                          <Card className="">
+                            <CardContent>
+                              <Typography variant="h6" gutterBottom>Registration Details</Typography>
+                              <Typography><strong>First Name:</strong> {formData['Patient Name_First Name']}</Typography>
+                              <Typography><strong>Gender:</strong> {formData['Gender']}</Typography>
+                              <Typography><strong>Age:</strong> {formData['Age']}</Typography>
+                              <Typography><strong>Unique ID:</strong> {formData['Unique ID_Unique ID']}</Typography>
+                            </CardContent>
+                          </Card>
+
+                        </Grid>
+                        <Grid items xs={0.5}></Grid>
+                        <Grid items xs={7}>
+                          <Card>
+                            {
+                              Object.keys(eventData).length > 0 ? <>
+                                {
+                                  Object.keys(eventData).map((event,idx) => {
+                                    let stageObjet = _.find(metadata.programStages, { "id": event })
+                                    console.log(stageObjet, "stageObjet new")
+                                    return (
+                                      <>
+                                        <CardHeader style={{padding:"5px"}} title={stageObjet.name} />
+                                        {
+                                          renderStages(_.sortBy(eventData[event], "lastUpdated")[0],stageObjet,idx)
+                                          // eventData.event.dataValues
+                                        }
+                                      </>
+                                    )
+                                  })
+                                }
+                              </> : "No data"
+                            }
+                          </Card>
+                        </Grid>
+                      </Grid>
+                      {/* Outcome Section */}
+                    </div>
+                  </div>
+                </div>
+
+              </Box>
+            </Box>
+          </Modal>
         </div>
         {/* <video muted loop id="myVideo" autoPlay>
                 <source src={videoFile} type="video/mp4" />

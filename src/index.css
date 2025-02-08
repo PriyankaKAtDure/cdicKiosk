@@ -1106,3 +1106,17 @@ body{
 .text-center {
   text-align: center;
 }
+
+.content.summarydiv{
+  background: #fff;
+  border-radius: 10px;
+  padding: 4%;
+  height: 90vh;
+}
+.justify-content-space{
+  justify-content: space-between;
+}
+
+.summarydiv h3,.summarydiv h6,.summarydiv span{
+  color: var(--var-nova-color);
+}
