@@ -45,6 +45,8 @@ export default function Forms() {
     navigate("/patient");
   };
 
+  const [generateQrString, setGenerateQrString] = React.useState(false);
+
   function generateQRCode(length) {
     var result = "";
     var characters =
@@ -85,6 +87,7 @@ export default function Forms() {
       let inputJson = { ...formData, timeIn: "1" };
       inputJson["phoneNumber"] = formData["phoneCode"] + formData["phoneNumber"]
       inputJson["qrCode"] = generateQRCode(8);
+      setGenerateQrString(inputJson["qrCode"]); 
       console.log("Form Data:", inputJson);
       const response = await fetch(
         "https://cdicuat.imonitorplus.com/service/api/filter/createBotRegistration",
@@ -373,7 +376,7 @@ export default function Forms() {
                 <div class="firstinfo">
                   <QRCode
                     id="qr-gen"
-                    value={"dureProg_ggUeSw7r"}
+                    value={generateQrString}
                     size={100}
                     level={"H"}
                     includeMargin={true}
