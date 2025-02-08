@@ -138,10 +138,10 @@ export default function Search() {
             {/* <Typography variant="h4" mb={4} textAlign="center">
         Patient Options
       </Typography> */}
-            <Grid container spacing={2} justifyContent="center" className="">
+            <Grid container spacing={4} justifyContent="center" className="">
               {/* New Patient Card */}
-
-              <Grid item xs={12} sm={12} md={6} onClick={() => { }} className="cursor-pointer">
+               <Grid item xs={12} lg={3}></Grid>
+              <Grid item xs={6} sm={12} md={6} lg={3} onClick={() => { }} className="cursor-pointer">
                 <Card sx={{ bgcolor: "#f8fbff", borderRadius: 2, boxShadow: 2, marginBottom: 2 }}>
                   <CardContent>
                     <Box display="flex" flexDirection="column" alignItems="center" gap={1}>
@@ -160,7 +160,7 @@ export default function Search() {
                 </Card>
               </Grid>
 
-              <Grid item xs={12} sm={12} md={6} onClick={() => { }} className="cursor-pointer">
+              <Grid item xs={6} sm={12} md={6} lg={3} onClick={() => { }} className="cursor-pointer">
 
               <Card sx={{ bgcolor: "#f8fbff", borderRadius: 2, boxShadow: 2 }}>
                   <CardContent>
@@ -172,7 +172,7 @@ export default function Search() {
                         </Typography>
                       </div>
                       <div className="patientSecondDiv">
-                        <img src={imgUrl.qrCode} onClick={e => { openQrScanner() }} className="patientImg"></img>
+                        <img src={imgUrl.qrCodeImg} onClick={e => { openQrScanner() }} className="patientImg"></img>
                         <div id="reader"></div>
                       </div>
 
@@ -180,6 +180,7 @@ export default function Search() {
                   </CardContent>
                 </Card>
                 </Grid>
+                <Grid item xs={4} lg={3}></Grid>
 
               {/* Existing Patient Card */}
               <Grid item xs={9} sm={9} md={9} onClick={() => navigate("/t")} className="cursor-pointer d-none patientSummaryBox">

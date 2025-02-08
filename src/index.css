@@ -711,10 +711,16 @@ html {
     position: relative;
 }
 
-.firstinfo img {
+/* .firstinfo img {
     border-radius: 50%;
     width: 120px;
     height: 120px;
+} */
+
+.qrCodeImg img{
+  background-color: #001965;
+    padding: 14px;
+    border: 1px solid #51d0e1
 }
 
 #qr-gen{
@@ -725,7 +731,7 @@ html {
 
 .firstinfo .profileinfo {
     padding: 0px 20px;
-    width: 55%;
+    /* width: 55%; */
 }
 
 .justify-content-end{
@@ -749,6 +755,7 @@ input div{
     color: #00bcd4;
     font-style: italic;
     margin-top: 0px;
+    text-transform: capitalize;
 }
 
 .firstinfo .profileinfo p.bio {

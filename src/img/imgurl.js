@@ -15,6 +15,9 @@ const imgUrl  ={
   'cdicBg' : require('../img/videobg.png'),
   'botIcon' : require ('../img/botIcon.png'),
   'pointIcon' : require('../img/point.png'),
+
+  'openProfile' : require('../img/open-profile.png'),
+  'qrCodeImg' : require('../img/qr-bigcode.png'),
   
 }
 

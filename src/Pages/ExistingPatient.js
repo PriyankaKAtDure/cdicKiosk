@@ -369,26 +369,38 @@ const getPatientDetails = async(data) => {
                   </IconButton>
                 </div>
                 <div class="firstinfo">
-                  {formDataQr["QR code_QR code"] ? <QRCode
-                    id="qr-gen"
-                    value={formDataQr["QR code_QR code"]}
-                    size={100}
-                    level={"H"}
-                    includeMargin={true}
-                  //onClick={enlargeImg}
-                  /> : <img src={imgUrl.qrCode}  className=""></img>}
-                  {/* <img src="https://bootdey.com/img/Content/avatar/avatar6.png" /> */}
+                 
+                  <Grid container spacing={0} className='justify-content-center align-items-center'>
+                        <Grid items xs={5}>
+                        <div className='d-flex justify-content-end align-items-center qrCodeImg'>
+                        {formDataQr["QR code_QR code"] ? <QRCode
+                        id="qr-gen"
+                        value={formDataQr["QR code_QR code"]}
+                        size={100}
+                        level={"H"}
+                        includeMargin={true}
+                      //onClick={enlargeImg}
+                      /> : <img src={imgUrl.qrCode}  className=""></img>}
+                      </div>
+                      {/* <img src="https://bootdey.com/img/Content/avatar/avatar6.png" /> */}
+                        </Grid>
+                        <Grid items xs={7}>
+                          
                   <div class="profileinfo">
 
-                    <h3>{formDataQr["Patient Name_First Name"]}</h3>
-                    <h5>UIC: {formDataQr["Unique ID_Unique ID"]}</h5>
-                    <h5>Gender: {formDataQr["Gender"]}</h5>
-                    <h5>Age: {formDataQr["Age"]}</h5>
-                    <h6 onClick={e => {
-                      localStorage.setItem("userData",JSON.stringify(formDataQr))
-                      navigate("/search")
-                    }}>Open profile</h6>
-                  </div>
+                        <h3>{formDataQr["Patient Name_First Name"]}</h3>
+                        <h5>UIC: {formDataQr["Unique ID_Unique ID"]}</h5>
+                        <h5>Gender: {formDataQr["Gender"]}</h5>
+                        <h5>Age: {formDataQr["Age"]}</h5>
+                        <div className='d-flex justify-content-end align-items-center'>
+                          <img src={imgUrl.openProfile} className='cursor-pointer' onClick={e => {
+                          localStorage.setItem("userData",JSON.stringify(formDataQr))
+                          navigate("/search")
+                        }}></img>
+                        </div>
+                        </div>
+                        </Grid>
+                  </Grid>
                 </div>
               </div>
             </div>
