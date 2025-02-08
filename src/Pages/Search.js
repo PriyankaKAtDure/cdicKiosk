@@ -141,7 +141,7 @@ export default function Search() {
             <Grid container spacing={4} justifyContent="center" className="">
               {/* New Patient Card */}
                <Grid item xs={12} lg={3}></Grid>
-              <Grid item xs={6} sm={12} md={6} lg={3} onClick={() => { }} className="cursor-pointer">
+              <Grid item xs={6} sm={6} md={6} lg={3} onClick={() => { }} className="cursor-pointer">
                 <Card sx={{ bgcolor: "#f8fbff", borderRadius: 2, boxShadow: 2, marginBottom: 2 }}>
                   <CardContent>
                     <Box display="flex" flexDirection="column" alignItems="center" gap={1}>
@@ -160,7 +160,7 @@ export default function Search() {
                 </Card>
               </Grid>
 
-              <Grid item xs={6} sm={12} md={6} lg={3} onClick={() => { }} className="cursor-pointer">
+              <Grid item xs={6} sm={6} md={6} lg={3} onClick={() => { }} className="cursor-pointer">
 
               <Card sx={{ bgcolor: "#f8fbff", borderRadius: 2, boxShadow: 2 }}>
                   <CardContent>
