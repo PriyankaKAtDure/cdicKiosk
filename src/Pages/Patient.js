@@ -427,7 +427,9 @@ export default function Patient() {
                     <Typography variant="h4" mb={4} textAlign="center" className="mainHeading mb-0">
                   Welcome to CDIC
                 </Typography>
-                <p className="subHeading">Choose your patient type <img src={imgUrl.pointIcon} className="mobile-d-none"></img> </p>
+                <p className="subHeading">Choose your patient type 
+                  {/* <img src={imgUrl.pointIcon} className="mobile-d-none"></img>  */}
+                  </p>
                     </div>
                    
                 </Grid>

@@ -14,7 +14,8 @@ import {
   Divider,
   ListItemText,
   Toolbar,
-  AppBar
+  AppBar,
+  Modal
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import imgUrl from "../img/imgurl";
@@ -24,7 +25,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import videoFile  from '../img/videobg.mp4';
+import { Html5QrcodeScanner } from "html5-qrcode";
+import QRCode from 'react-qr-code';
 
 function ExistingPatient() {
   const navigate = useNavigate();
@@ -32,6 +34,9 @@ function ExistingPatient() {
     phoneNumber: "",
     phoneCode:""
   });
+
+  const [formDataQr, setFormDataQr] = useState({});
+
   const [userList, setUserList] = useState([]);
   const handleChange = (e) => {
 
@@ -74,7 +79,6 @@ function ExistingPatient() {
             draggable: true,
             progress: undefined,
             theme: "light",
-            transition: "Slide",
             });
             setFormData({
               phoneCode:"",
@@ -89,6 +93,7 @@ function ExistingPatient() {
   }
   const [open, setOpen] = React.useState(false);
 
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -97,6 +102,122 @@ function ExistingPatient() {
     setOpen(false);
   };
 
+
+  const [openModal, setOpenModal] = React.useState(false);
+  const handleModalOpen = () => {
+    setOpenModal(true);
+  };
+
+  const handleModalClose = () => {
+    setOpenModal(false);
+  };
+  // Scan QR code
+
+  const openQrScanner = async () => {
+    let qrSting = null;
+  if (window.cordova) {
+    // ✅ Use Cordova Barcode Scanner on Mobile
+    window.cordova.plugins.barcodeScanner.scan(
+      function (result) {
+        if (!result.cancelled) {
+          // alert("QR Code Scanned: " + result.text);
+          qrSting = result.text
+        }
+      },
+      function (error) {
+        alert("Scanning failed: " + error);
+      },
+      {
+        preferFrontCamera: false, // Use back camera
+        showFlipCameraButton: true, // Allow switching cameras
+        showTorchButton: true, // Show flashlight option
+        torchOn: false, // Start with flashlight off
+        saveHistory: false, // Do not save scan history
+        prompt: "Place a QR code inside the scan area", // Custom scan prompt
+        resultDisplayDuration: 500, // How long to display result
+        formats: "QR_CODE", // Only allow QR codes
+        orientation: "portrait", // Force portrait mode
+        disableAnimations: true, // Disable animations for faster performance
+        disableSuccessBeep: false // Beep sound when scan is successful
+      }
+    );
+  } else {
+    // ✅ Use `html5-qrcode` in the Browser
+    const scanner = new Html5QrcodeScanner("reader", {
+      fps: 10,
+      qrbox: { width: 250, height: 250 },
+    });
+
+    scanner.render(
+      (decodedText) => {
+        // alert("Scanned (Browser): " + decodedText);
+        scanner.clear(); // Stop scanner after a successful scan
+        qrSting = decodedText
+        getUserListing(qrSting)
+      },
+      (error) => {
+        console.error("QR Scan Error:", error);
+      }
+    );
+  } 
+  }
+  const getUserListing = async(qrSting) => {
+    if(qrSting){
+      const response = await fetch(
+        "https://cdicuat.imonitorplus.com/service/api/trackedEntityInstances/query.json?ou=YUv0ube9634&ouMode=ALL&&order=created:desc&program=eAHvg6zuxvK&attribute=cbUvtO7iToD:LIKE:"+qrSting+"&pageSize=50&page=1&totalPages=false&skipPaging=true",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Basic " + btoa("botUser1:Dure@2025"),
+          },
+        }
+      );
+      if (response.ok) {
+        const result = await response.json();
+        console.log("Success:", result);
+        console.log(convertDHIS2Data(result))
+        setFormDataQr(convertDHIS2Data(result)[0])
+        handleModalOpen()
+      }
+    }
+  }
+  function convertDHIS2Data(data) {
+    let result = [];
+    let headers = data.headers;
+    let rows = data.rows;
+    
+    rows.forEach(row => {
+        let rowObj = {};
+        headers.forEach((header, index) => {
+            rowObj[header.column] = row[index] || null; // Assign value or null if empty
+        });
+        result.push(rowObj);
+    });
+    
+    return result;
+}
+const getPatientDetails = async(data) => {
+  console.log(data,"data")
+  const response = await fetch(
+    "https://cdicuat.imonitorplus.com/service/api/trackedEntityInstances/query.json?ou=YUv0ube9634&ouMode=ALL&&order=created:desc&program=eAHvg6zuxvK&attribute=Ea27uAHNmEi:LIKE:"+data.patientId+"&pageSize=50&page=1&totalPages=false&skipPaging=true",
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Basic " + btoa("botUser1:Dure@2025"),
+      },
+    }
+  );
+  if (response.ok) {
+    const result = await response.json();
+    console.log("Success:", result);
+    console.log(convertDHIS2Data(result))
+    setFormDataQr(convertDHIS2Data(result)[0])
+    handleModalOpen()
+  }
+
+}
   const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
@@ -163,7 +284,8 @@ function ExistingPatient() {
             <Grid item xs={12} lg={12} className="d-flex justify-content-center align-items-center flex-direction-column gap-10px">
               <h5 className='mt-0px mb-0px color-white  '>OR</h5>
               <div>
-                <img src={imgUrl.qrCode} className=""></img>
+                <img src={imgUrl.qrCode} onClick={e => {openQrScanner()}} className=""></img>
+                <div id="reader"></div>
               </div>
             </Grid>
             <Grid item xs={12} lg={12} className="d-flex justify-content-center align-items-center gap-10px">
@@ -200,7 +322,10 @@ function ExistingPatient() {
               {userList.map((user,idx) => {
                 return (
                   <>
-                  <ListItemButton onClick={e =>{ navigate("/search");}} key={idx}>
+                  <ListItemButton onClick={e =>{ 
+                    getPatientDetails(user)
+                    // navigate("/search")
+                    }} key={idx}>
                       <ListItemText primary={user.patientName} secondary={user.patientId} />
                     </ListItemButton>
                     <Divider />
@@ -218,7 +343,59 @@ function ExistingPatient() {
            </Grid>
            <Grid item xs={0} lg={1}></Grid>
         </Grid>
-      
+        <Modal open={openModal} onClose={handleModalClose} aria-labelledby="modal-title">
+        <Box
+        className="modalPatientStatus"
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: 400,
+            // boxShadow: 24,
+            p: 3,
+            borderRadius: 2,
+          }}
+        >
+          {/* Modal Header */}
+
+          {/* Modal Content */}
+          <Box mt={2}>
+            <div class="content">
+              <div class="card">
+                <div class="d-flex justify-content-end align-items-center">
+                  <IconButton onClick={handleModalClose}>
+                    <CloseIcon />
+                  </IconButton>
+                </div>
+                <div class="firstinfo">
+                  {formDataQr["QR code_QR code"] ? <QRCode
+                    id="qr-gen"
+                    value={formDataQr["QR code_QR code"]}
+                    size={100}
+                    level={"H"}
+                    includeMargin={true}
+                  //onClick={enlargeImg}
+                  /> : <img src={imgUrl.qrCode}  className=""></img>}
+                  {/* <img src="https://bootdey.com/img/Content/avatar/avatar6.png" /> */}
+                  <div class="profileinfo">
+
+                    <h3>{formDataQr["Patient Name_First Name"]}</h3>
+                    <h5>UIC: {formDataQr["Unique ID_Unique ID"]}</h5>
+                    <h5>Gender: {formDataQr["Gender"]}</h5>
+                    <h5>Age: {formDataQr["Age"]}</h5>
+                    <h6 onClick={e => {
+                      localStorage.setItem("userData",JSON.stringify(formDataQr))
+                      navigate("/search")
+                    }}>Open profile</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </Box>
+        </Box>
+      </Modal>
     </div>
 
       {/* <video muted loop id="myVideo" autoPlay>
