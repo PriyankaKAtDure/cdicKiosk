@@ -122,6 +122,8 @@ function ExistingPatient() {
         if (!result.cancelled) {
           // alert("QR Code Scanned: " + result.text);
           qrSting = result.text
+          console.log(qrSting)
+          getUserListing(qrSting)
         }
       },
       function (error) {
