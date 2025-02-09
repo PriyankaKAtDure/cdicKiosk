@@ -283,22 +283,25 @@ export default function Search() {
           </Box>
           <Modal open={openModal} onClose={handleModalClose} aria-labelledby="modal-title">
             <Box
-              className="modalPatientStatus"
+              className="modalPatientStatus modalPatientSummary"
               sx={{
                 position: "absolute",
                 top: "50%",
                 left: "50%",
                 transform: "translate(-50%, -50%)",
-                // width: 400,
-                // boxShadow: 24,
-                // p: 3,
+                width: 1000, // Fixed width
+                height: 500, // Fixed height
+                // overflowY: "auto", 
+                bgcolor: "background.paper",
+                boxShadow: 24,
+                p: 3,
                 borderRadius: 2,
               }}
             >
               {/* Modal Header */}
 
               {/* Modal Content */}
-              <Box mt={2}>
+              <Box>
                 <div class="content summarydiv">
                   <div class="">
                     {/* <div class="d-flex justify-content-end align-items-center">
@@ -320,22 +323,22 @@ export default function Search() {
                       </div>
 
                       {/* Patient Details */}
-                      <Grid container spacing={0} className=''>
-                        <Grid items xs={4}>
-                          <Card className="">
+                      <Grid container spacing={1} className=''>
+                        <Grid items xs={12} sm={4} md={4} lg={4} className="patientLeftSummary">
+                          <Card className="bg-transparent patientRegisterDetails" >
                             <CardContent>
                               <Typography variant="h6" gutterBottom>Registration Details</Typography>
-                              <Typography><strong>First Name:</strong> {formData['Patient Name_First Name']}</Typography>
-                              <Typography><strong>Gender:</strong> {formData['Gender']}</Typography>
-                              <Typography><strong>Age:</strong> {formData['Age']}</Typography>
-                              <Typography><strong>Unique ID:</strong> {formData['Unique ID_Unique ID']}</Typography>
+                              <Typography><strong>First Name : </strong>{formData['Patient Name_First Name']} </Typography>
+                              <Typography><strong>Gender : </strong> {formData['Gender']}</Typography>
+                              <Typography><strong>Age : </strong> {formData['Age']}</Typography>
+                              <Typography><strong>Unique ID : </strong> {formData['Unique ID_Unique ID']}</Typography>
                             </CardContent>
                           </Card>
 
                         </Grid>
-                        <Grid items xs={0.5}></Grid>
-                        <Grid items xs={7}>
-                          <Card>
+                        {/* <Grid items xs={0.5}></Grid> */}
+                        <Grid items xs={12} sm={8} md={8} lg={8} className="patientRightSummary" sx={{ overflowY: "auto", maxHeight: 390 }}>
+                          <Card sx={{boxShadow: "none"}}>
                             {
                               Object.keys(eventData).length > 0 ? <>
                                 {
@@ -344,11 +347,13 @@ export default function Search() {
                                     console.log(stageObjet, "stageObjet new")
                                     return (
                                       <>
+                                      <div className="patientSummarySubSection">
                                         <CardHeader style={{padding:"5px"}} title={stageObjet.name} />
                                         {
                                           renderStages(_.sortBy(eventData[event], "lastUpdated")[0],stageObjet,idx)
                                           // eventData.event.dataValues
                                         }
+                                        </div>
                                       </>
                                     )
                                   })
