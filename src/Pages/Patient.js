@@ -304,12 +304,10 @@ export default function Patient() {
     }
     if (questionIdx == 1) {
       console.log(response, "response for second question")
-      if (test.toLowerCase().includes("male"))
-        tempholder['gender'] = "1";
-      // setFormData((prevData) => ({ ...prevData, ["gender"]: "1", }));
-      else if (test.toLowerCase().includes("female"))
+      if (test.toLowerCase().includes("female") || test.toLowerCase().includes("femail"))
         tempholder['gender'] = "2";
-      // setFormData((prevData) => ({ ...prevData, ["gender"]: "2", }));
+      else if (test.toLowerCase().includes("male") || test.toLowerCase().includes("mail"))
+        tempholder['gender'] = "1";
       else if (test.toLowerCase().includes("other"))
         tempholder['gender'] = "3";
       // setFormData((prevData) => ({ ...prevData, ["gender"]: "3", }));
@@ -508,7 +506,7 @@ export default function Patient() {
           <AppBar sx={{ position: 'relative' }}>
             <Toolbar className='existingPatientList'>
               <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div" className="text-center">
-                Voice Flow
+                Patient Registry
               </Typography>
             </Toolbar>
           </AppBar>
