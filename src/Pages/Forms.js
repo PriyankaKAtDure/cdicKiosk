@@ -157,7 +157,14 @@ export default function Forms() {
               <img src={imgUrl.cdiclogo} className="main-logo"></img>
             </div>
           </Grid>
-          <Grid item xs={1}></Grid>
+          <Grid item xs={1}>
+          <div
+              className="backButton">
+              <Button
+                startIcon={<img src={imgUrl.homeIcon} />}>
+              </Button>
+            </div>
+          </Grid>
         </Grid>
 
         <Grid container spacing={2} className="desktop-form-section">

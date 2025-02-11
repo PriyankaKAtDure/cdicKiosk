@@ -18,6 +18,8 @@ const imgUrl  ={
 
   'openProfile' : require('../img/open-profile.png'),
   'qrCodeImg' : require('../img/qr-bigcode.png'),
+
+  'homeIcon' :require('../img/home.png')
   
 }
 
