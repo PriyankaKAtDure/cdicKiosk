@@ -1249,4 +1249,9 @@ body{
     padding-top: 75px !important;
 }
 
+.patientSection.patientFormMainSection{
+  margin-left: 50px !important;
+    margin-right: 50px !important;
+}
+
 }
