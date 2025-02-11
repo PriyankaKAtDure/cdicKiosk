@@ -1027,6 +1027,12 @@ body{
   max-width: 320px;
 }
 
+.patientHeaderSection{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
 }
 
 .pt-0px{
