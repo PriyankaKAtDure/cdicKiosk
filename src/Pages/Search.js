@@ -198,7 +198,7 @@ export default function Search() {
       <div className='position-relative'>
         <ToastContainer />
         <div className="patientbg patientMainSection mainPatientLanding">
-          <Grid container spacing={0} className="patientHeaderSection">
+          <Grid container spacing={0} className="patientHeaderSection mainHomeHeaderSection">
             <Grid items xs={1}>
               <div
                 className="backButton">
@@ -215,7 +215,14 @@ export default function Search() {
                 <img src={imgUrl.cdiclogo} className="main-logo"></img>
               </div>
             </Grid>
-            <Grid item xs={1}></Grid>
+            <Grid item xs={1}>
+            <div
+              className="backButton">
+              <Button
+                startIcon={<img src={imgUrl.homeIcon} />}>
+              </Button>
+            </div>
+            </Grid>
           </Grid>
           <Box p={4} className="patientSection justify-content-start searchReportSection">
             {/* <Typography variant="h4" mb={4} textAlign="center">

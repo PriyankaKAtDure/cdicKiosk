@@ -400,7 +400,7 @@ export default function Patient() {
         <div className="patientbg patientMainSection patientPage mainPatientLanding">
           <ToastContainer />
           
-          <Grid container spacing={0} className="patientHeaderSection">
+          <Grid container spacing={0} className="patientHeaderSection mainHomeHeaderSection">
             <Grid items xs={1}>
 
               <div
