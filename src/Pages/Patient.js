@@ -405,7 +405,7 @@ export default function Patient() {
                 className="backButton">
                 <Button
                   startIcon={<ArrowBack />}
-                  onClick={() => navigate(-1)} // Navigate to the previous page
+                  onClick={() => navigate("/")} // Navigate to the previous page
                 // sx={{ mb: 2 }}
                 >
                 </Button>

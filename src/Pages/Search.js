@@ -219,6 +219,7 @@ export default function Search() {
             <div
               className="backButton">
               <Button
+                onClick={e => navigate("/patient")}
                 startIcon={<img src={imgUrl.homeIcon} />}>
               </Button>
             </div>
