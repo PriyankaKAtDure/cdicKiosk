@@ -1245,6 +1245,7 @@ body{
 
   .modalPatientStatus.modalPatientSummary {
     width: 600px !important;
+    height: 900px;
   }
 
   .searchReportSection  {
