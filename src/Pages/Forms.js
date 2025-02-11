@@ -382,6 +382,9 @@ export default function Forms() {
                   </IconButton>
                 </div>
                 <div class="firstinfo">
+                 <Grid container spacing={0} className='justify-content-center align-items-center'>
+                  <Grid items xs={5}>
+                  <div className='d-flex justify-content-end align-items-center qrCodeImg'>
                   <QRCode
                     id="qr-gen"
                     value={generateQrString}
@@ -390,14 +393,21 @@ export default function Forms() {
                     includeMargin={true}
                   //onClick={enlargeImg}
                   />
-                  {/* <img src="https://bootdey.com/img/Content/avatar/avatar6.png" /> */}
-                  <div class="profileinfo">
-
-                    <h3>{formData["firstname"]}</h3>
-                    <h5>UIC: {formData["uic"]}</h5>
-                    <h5>Gender: {formData["gender"] == "1" ? "Male" : (formData["gender"] == "2" ? "Female": "Others" )}</h5>
-                    <h5>Age: {formData["age"]}</h5>
                   </div>
+                  </Grid>
+                   <Grid items xs={7}>
+                   <div class="profileinfo">
+
+                        <h3>{formData["firstname"]}</h3>
+                        <h5>UIC: {formData["uic"]}</h5>
+                        <h5>Gender: {formData["gender"] == "1" ? "Male" : (formData["gender"] == "2" ? "Female": "Others" )}</h5>
+                        <h5>Age: {formData["age"]}</h5>
+                    </div>
+                   </Grid>
+                 </Grid>
+                  
+                  {/* <img src="https://bootdey.com/img/Content/avatar/avatar6.png" /> */}
+
                 </div>
               </div>
             </div>
