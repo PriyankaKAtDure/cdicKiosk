@@ -38,6 +38,8 @@ export default function Patient() {
   });
 
 
+  const [generateQrString, setGenerateQrString] = React.useState(null);
+
   const existingQuestions = [
     "What is your name?",
     "What is your gender? Male , Female , Other",
@@ -108,6 +110,7 @@ export default function Patient() {
       let inputJson = { ...formData, timeIn: "1" };
       inputJson["phoneNumber"] = "91" + formData["phoneNumber"]
       inputJson["qrCode"] = generateQRCode(8);
+      setGenerateQrString(inputJson["qrCode"])
       console.log("Form Data:", inputJson);
       const response = await fetch(
         "https://cdicuat.imonitorplus.com/service/api/filter/createBotRegistration",
@@ -575,7 +578,7 @@ export default function Patient() {
                     <div class="firstinfo">
                       <QRCode
                         id="qr-gen"
-                        value={"dureProg_ggUeSw7r"}
+                        value={generateQrString}
                         size={100}
                         level={"H"}
                         includeMargin={true}

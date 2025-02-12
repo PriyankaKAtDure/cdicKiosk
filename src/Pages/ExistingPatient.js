@@ -179,8 +179,25 @@ function ExistingPatient() {
         const result = await response.json();
         console.log("Success:", result);
         console.log(convertDHIS2Data(result))
-        setFormDataQr(convertDHIS2Data(result)[0])
-        handleModalOpen()
+        if(result.length > 0){
+          setFormDataQr(convertDHIS2Data(result)[0])
+          handleModalOpen()
+        }else{
+          toast.info('No record found', {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          setFormData({
+            phoneCode: "",
+            phoneNumber: ""
+          })
+        }
       }
     }
   }
