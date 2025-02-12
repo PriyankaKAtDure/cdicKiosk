@@ -230,7 +230,7 @@ function ExistingPatient() {
         {/* back logo div */}
         <ToastContainer />
         <Grid container spacing={0} className="patientHeaderSection">
-          <Grid item xs={1} md={1} lg={12}>
+          <Grid item xs={1} md={1} lg={11}>
             <div
               className="backButton">
               <Button
@@ -241,12 +241,12 @@ function ExistingPatient() {
               </Button>
             </div>
           </Grid>
-          <Grid item xs={10} md={10} lg={10}>
-            <div className="patientLogo d-desktop-none">
+          <Grid item xs={10} md={10} lg={10} className="keyboard-none d-desktop-none">
+            <div className="patientLogo">
               <img src={imgUrl.cdiclogo} className="main-logo"></img>
             </div>
           </Grid>
-          <Grid item xs={1}>
+          <Grid item xs={1} md={1} lg={1}>
           <div
               className="backButton">
               <Button
