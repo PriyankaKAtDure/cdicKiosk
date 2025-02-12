@@ -298,7 +298,7 @@ export default function Search() {
                 left: "50%",
                 transform: "translate(-50%, -50%)",
                 width: 1000, // Fixed width
-                height: 500, // Fixed height
+                // height: 500, 
                 // overflowY: "auto", 
                 bgcolor: "background.paper",
                 boxShadow: 24,
@@ -332,7 +332,7 @@ export default function Search() {
 
                       {/* Patient Details */}
                       <Grid container spacing={1} className=''>
-                        <Grid items xs={12} sm={12} md={12} lg={12} className="patientLeftSummary">
+                        <Grid items xs={12} sm={12} md={12} lg={3} className="patientLeftSummary">
                           <Card className="bg-transparent patientRegisterDetails" >
                             <CardContent>
                               <Typography variant="h6" gutterBottom>Registration Details</Typography>
@@ -345,7 +345,7 @@ export default function Search() {
 
                         </Grid>
                         {/* <Grid items xs={0.5}></Grid> */}
-                        <Grid items xs={12} sm={12} md={12} lg={12} className="patientRightSummary" sx={{ overflowY: "auto", maxHeight: 390 }}>
+                        <Grid items xs={12} sm={12} md={12} lg={9} className="patientRightSummary" sx={{ overflowY: "auto", height:"calc(100dvh - 680px)" }}>
                           <Card sx={{boxShadow: "none"}}>
                             {
                               Object.keys(eventData).length > 0 ? <>

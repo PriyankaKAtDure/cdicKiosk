@@ -1053,11 +1053,12 @@ body{
 
  .content.summarydiv .patientRightSummary{
   max-height: 243px;
+  height: auto;
     margin-top: 10px;
  }
 
  .modalPatientStatus.modalPatientSummary{
-   width: auto;
+   width: 350px;
  }
 
  .homeButton button{
@@ -1259,7 +1260,12 @@ body{
 
   .modalPatientStatus.modalPatientSummary {
     width: 600px !important;
-    height: 900px;
+    height: 800px !important;;
+  }
+
+  .content.summarydiv .patientRightSummary{
+    max-height: fit-content;
+    height: calc(100dvh - 68px) !important;
   }
 
   .searchReportSection  {
@@ -1276,4 +1282,20 @@ body{
 }
 
 
+}
+
+@media (min-width:1920px) {
+  .modalPatientStatus{
+    width: 450px !important;
+  }
+
+  .modalPatientStatus.modalPatientSummary {
+    width: 60% !important;
+    height: auto !important;
+  }
+
+}
+
+.modalPatientStatus.modalPatientSummary{
+  overflow: hidden;
 }
