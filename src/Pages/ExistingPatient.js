@@ -248,7 +248,7 @@ function ExistingPatient() {
           </Grid>
           <Grid item xs={1} md={1} lg={1}>
           <div
-              className="backButton">
+              className="backButton homeButton">
               <Button
                 onClick={e => navigate("/patient")}
                 startIcon={<img src={imgUrl.homeIcon} />}>

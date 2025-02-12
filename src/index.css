@@ -1059,6 +1059,18 @@ body{
  .modalPatientStatus.modalPatientSummary{
    width: auto;
  }
+
+ .homeButton button{
+  min-width: fit-content !important;
+ }
+
+ .homeButton button span {
+  margin-left: -12px;
+ }
+
+ .voiceFixIcon{
+   bottom: 10px !important;
+ }
 }
 
 @media (min-width: 1024px) and (max-width: 1025px) and (min-height: 1366px) {
