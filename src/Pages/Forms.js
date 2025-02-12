@@ -152,7 +152,7 @@ export default function Forms() {
               </Button>
             </div>
           </Grid>
-          <Grid item xs={10} md={10} lg={10} className="keyboard-none d-desktop-none">
+          <Grid item xs={10} md={10} lg={0} className="keyboard-none d-desktop-none">
             <div className="patientLogo">
               <img src={imgUrl.cdiclogo} className="main-logo"></img>
             </div>
