@@ -141,7 +141,7 @@ export default function Forms() {
       <div className="patientbg patientMainSection">
         <ToastContainer />
         <Grid container spacing={0} className="patientHeaderSection">
-          <Grid item xs={1} md={1} lg={11} className="keyboard-none">
+          <Grid item xs={1} md={1} lg={11}>
             <div
               className="backButton keyboard-none">
               <Button
