@@ -249,7 +249,7 @@ function ExistingPatient() {
         <Grid container spacing={0} className="patientHeaderSection">
           <Grid item xs={1} md={1} lg={11}>
             <div
-              className="backButton">
+              className="backButton keyboard-none">
               <Button
                 startIcon={<ArrowBack />}
                 onClick={() => navigate(-1)} // Navigate to the previous page
@@ -258,14 +258,14 @@ function ExistingPatient() {
               </Button>
             </div>
           </Grid>
-          <Grid item xs={10} md={10} lg={10} className="keyboard-none d-desktop-none">
-            <div className="patientLogo">
+          <Grid item xs={10} md={10} lg={10} className="d-desktop-none">
+            <div className="patientLogo keyboard-none">
               <img src={imgUrl.cdiclogo} className="main-logo"></img>
             </div>
           </Grid>
           <Grid item xs={1} md={1} lg={1}>
           <div
-              className="backButton homeButton">
+              className="backButton homeButton keyboard-none">
               <Button
                 onClick={e => navigate("/patient")}
                 startIcon={<img src={imgUrl.homeIcon} />}>

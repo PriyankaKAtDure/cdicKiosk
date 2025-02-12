@@ -201,7 +201,7 @@ export default function Search() {
           <Grid container spacing={0} className="patientHeaderSection mainHomeHeaderSection">
             <Grid items xs={1}>
               <div
-                className="backButton">
+                className="backButton keyboard-none">
                 <Button
                   startIcon={<ArrowBack />}
                   onClick={() => navigate(-1)} // Navigate to the previous page
@@ -211,13 +211,13 @@ export default function Search() {
               </div>
             </Grid>
             <Grid items xs={10}>
-              <div className="patientLogo">
+              <div className="patientLogo keyboard-none">
                 <img src={imgUrl.cdiclogo} className="main-logo"></img>
               </div>
             </Grid>
             <Grid item xs={1}>
             <div
-              className="backButton homeButton">
+              className="backButton homeButton keyboard-none">
               <Button
                 onClick={e => navigate("/patient")}
                 startIcon={<img src={imgUrl.homeIcon} />}>
