@@ -1285,7 +1285,7 @@ body{
 
 }
 
-@media (min-width:1920px) {
+@media (min-width:1920px)  {
   .modalPatientStatus{
     width: 450px !important;
   }
@@ -1295,6 +1295,23 @@ body{
     height: auto !important;
   }
 
+}
+
+/* kiosk  */
+
+@media screen and (width: 1280px) and (height: 720px){
+  .modalPatientStatus{
+    width: 450px !important;
+  }
+
+  .modalPatientStatus.modalPatientSummary {
+    width: 80% !important;
+    height: auto !important;
+  }
+
+  .modalPatientStatus.modalPatientSummary .patientRightSummary {
+    height: calc(100dvh - 390px) !important;
+  }
 }
 
 .modalPatientStatus.modalPatientSummary{
